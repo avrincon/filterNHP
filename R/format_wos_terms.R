@@ -32,6 +32,7 @@ format_wos_terms <- function(taxa, exclude = NULL) {
     general_terms <- setdiff(general_terms, excl_general_terms)
   }
 
+  general_terms <- paste0(general_terms, collapse = " OR ")
 
   wos_title_terms <- paste0("TI=(", general_terms, ")")
   wos_abtract_terms <- paste0("AB=(", general_terms, ")")
