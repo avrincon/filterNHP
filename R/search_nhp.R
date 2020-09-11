@@ -42,6 +42,6 @@ search_nhp <-
       term <- format_wos_terms(taxa, exclude)
     }
 
-    return(term)
+    term
 
   }

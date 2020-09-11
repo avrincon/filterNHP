@@ -19,7 +19,5 @@ format_wos_general_terms <- function(taxa) {
   # add quotes to terms
   ta3$term <- dQuote(ta3$term)
 
-  # general_terms <- paste0(ta3$term, collapse = " OR ")
-
-  return(ta3$term)
+  ta3$term
 }

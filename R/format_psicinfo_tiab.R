@@ -30,5 +30,5 @@ format_psicinfo_tiab <- function(taxa) {
   psycinfo_tiab_terms <- paste0(c(psycinfo_title_terms,
                                   psycinfo_abtract_terms), collapse = " OR ")
 
-  return(psycinfo_tiab_terms)
+  psycinfo_tiab_terms
 }

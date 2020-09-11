@@ -39,10 +39,8 @@ format_wos_terms <- function(taxa, exclude = NULL) {
   wos_author_keywords_terms <- paste0("AK=(", general_terms, ")")
 
 
-  wos_tak_terms <- paste0(c(wos_title_terms,
-                            wos_abtract_terms,
-                            wos_author_keywords_terms), collapse = " OR ")
-
-  return(wos_tak_terms)
+  paste0(c(wos_title_terms,
+           wos_abtract_terms,
+           wos_author_keywords_terms), collapse = " OR ")
 
 }

@@ -14,7 +14,9 @@ check_higher_taxon_bracket <- function(taxa) {
   x <- FindNode(primate_tree, taxa)
 
   # if there is more than one group, return original taxa
-  if(x$height != x$Get("totalCount")[[1]]) return(taxa)
+  if(x$height != x$Get("totalCount")[[1]]){
+    return(taxa)
+  }
 
   # if there is only one group, move down tree
   while(x$height == x$Get("totalCount")[[1]]){
@@ -24,5 +26,5 @@ check_higher_taxon_bracket <- function(taxa) {
     x <- Navigate(x, "..")
   }
 
-  return(child[child!="na"])
+  child[child!="na"]
 }

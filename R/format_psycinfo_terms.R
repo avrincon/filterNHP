@@ -38,6 +38,6 @@ format_psycinfo_terms <- function(taxa, exclude = NULL) {
     tiab_terms <- setdiff(tiab_terms, excl_tiab_terms)
   }
 
-  return(paste0(c(index_terms,
-                  tiab_terms), collapse = " OR "))
+  paste0(c(index_terms,
+           tiab_terms), collapse = " OR ")
 }

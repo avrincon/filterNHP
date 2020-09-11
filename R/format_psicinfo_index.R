@@ -22,5 +22,5 @@ format_psicinfo_index <- function(taxa) {
   psycinfo_index_terms <- paste(pii3$term, collapse = " OR ")
   psycinfo_index_terms <- paste0("DE(", psycinfo_index_terms, ")")
 
-  return(psycinfo_index_terms)
+  psycinfo_index_terms
 }

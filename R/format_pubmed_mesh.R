@@ -18,7 +18,9 @@ format_pubmed_mesh <- function(taxa) {
                      na.rm = T) > 0, ]
 
   # if nrow is 0, there are no mesh terms, return empty object
-  if(nrow(pm3) == 0) return(NULL)
+  if(nrow(pm3) == 0){
+    return(NULL)
+  }
 
   # otherwise check if terms should be exploded or not
   xx <- sapply(pm3[ , 2:ncol(pm3), drop = F], function(x) x == "NE")
@@ -37,5 +39,5 @@ format_pubmed_mesh <- function(taxa) {
   # add extension to search term
   pm3$search_term <- paste0(pm3$term, pm3$mesh)
 
-  return(pm3$search_term)
+  pm3$search_term
 }

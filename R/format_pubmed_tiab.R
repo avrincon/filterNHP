@@ -28,5 +28,5 @@ format_pubmed_tiab <- function(taxa) {
   # add extension to search term
   ta3$tiab_search_term <- paste0(ta3$term, ta3$tiab_term)
 
-  return(ta3$tiab_search_term)
+  ta3$tiab_search_term
 }
