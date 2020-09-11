@@ -9,6 +9,8 @@
 #' @examples
 #' check_higher_taxon_bracket("lepilemur")
 #' check_higher_taxon_bracket("otolemur")
+#'
+#' @noRd
 check_higher_taxon_bracket <- function(taxa) {
   # checks if there is only one taxonomic group below specified level
   x <- FindNode(primate_tree, taxa)
