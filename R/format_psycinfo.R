@@ -4,7 +4,6 @@
 #' @param exclude A character vector of primate taxa that are higher in the taxonomic tree than those provided in the taxa argument to exclude from the search terms.
 #'
 #' @return A string of search terms that are associated with the specified taxa, formatted for use in PscicInfo.
-#' @export
 #'
 #' @examples
 #' format_psicinfo_index("cercopithecidae")

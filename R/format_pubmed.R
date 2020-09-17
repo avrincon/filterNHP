@@ -5,8 +5,6 @@
 #'
 #' @return A string of search terms that are associated with the specified taxa, formatted for use in PubMed.
 #'
-#' @export
-#'
 #' @examples
 #' format_pubmed_mesh("papio")
 #' format_pubmed_mesh(c("papio", "macaca"))
@@ -26,7 +24,7 @@ format_pubmed_mesh <- function(taxa) {
 
   # keep rows where at least one taxa column is not NA, and is lower level taxa
   pm3 <- pm2[rowSums(sapply(pm2[ , 2:ncol(pm2), drop = FALSE],
-                            function(x) x %in% c("NE", "NN")),
+                            function(x) x %in% c("ne", "nn")),
                      na.rm = T) > 0, ]
 
   # if nrow is 0, there are no mesh terms, return empty object
@@ -35,7 +33,7 @@ format_pubmed_mesh <- function(taxa) {
   }
 
   # otherwise check if terms should be exploded or not
-  xx <- sapply(pm3[ , 2:ncol(pm3), drop = F], function(x) x == "NE")
+  xx <- sapply(pm3[ , 2:ncol(pm3), drop = F], function(x) x == "ne")
 
   # cannot do rowSums when matrix/vector has length 1, so use regular sum()
   if(length(xx) == 1){
@@ -80,7 +78,8 @@ format_pubmed_terms <- function(taxa, exclude = NULL) {
   if(!is.null(exclude)) exclude <- tolower(exclude)
 
   # check input to function arguments are correct
-  if(!all(taxa %in% correct_taxa_inputs)){
+  if(!all(taxa %in% correct_taxa_inputs) &
+     all(exclude %in% correct_taxa_inputs)){
     xx <- setdiff(taxa, correct_taxa_inputs)
     stop(paste("These terms are not valid taxa inputs:",
                paste(xx, collapse = ", ")))
