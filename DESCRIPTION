@@ -1,14 +1,19 @@
 Package: searchNHP
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Title: Non-human Primate Search Filter Terms
+Version: 0.0.0.9000
+Authors@R: person("Alan", "Rincon", email = "avrincon1@gmail.com",
+                  role = c("aut", "cre"))
+Description: This package provides a convinient way for researchers to format 
+    search filter terms non-human primates for popular databases such as PubMed 
+    and Web of Science. 
+License: Apache License (>= 2.0)
 Encoding: UTF-8
 LazyData: true
 Depends: 
     R (>= 2.10)
 RoxygenNote: 7.1.1
+Suggests: 
+    testthat
+Imports: 
+    data.tree (>= 1.0.0)
