@@ -50,11 +50,9 @@ format_psicinfo_tiab <- function(taxa) {
 
   general_terms <- paste0(ta3$term, collapse = " OR ")
 
-  psycinfo_title_terms <- paste0("TI(", general_terms, ")")
-  psycinfo_abtract_terms <- paste0("AB(", general_terms, ")")
+  psycinfo_terms <- paste0("TX(", general_terms, ")")
 
-  psycinfo_tiab_terms <- paste0(c(psycinfo_title_terms,
-                                  psycinfo_abtract_terms), collapse = " OR ")
+  psycinfo_tiab_terms <- paste0(psycinfo_terms, collapse = " OR ")
 
   psycinfo_tiab_terms
 }
