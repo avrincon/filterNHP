@@ -7,20 +7,27 @@
 search_nhp(database = "PubMed", taxa = NULL, exclude = NULL)
 }
 \arguments{
-\item{database}{A string indicating which database search terms should be formated for. Current options are "PubMed" (default), "PsycInfo" or "WebOfScience".}
+\item{database}{A string indicating which database search terms should be formatted for. Current options are "PubMed" (default), "PsycInfo" or "WebOfScience".}
 
-\item{taxa}{A character vector of primate taxa.}
+\item{taxa}{A character vector of primate taxa. If `taxa = NULL` (default),
+function will return search terms for all non-human primates.}
 
-\item{exclude}{A character vector of primate taxa that are higher in the taxonomic tree than those provided in the taxa argument to exclude from the search terms.}
+\item{exclude}{An optional character vector of primate taxa to exclude from
+the search terms. This is useful for example when you need search terms for
+all species of one family except one genus.}
 }
 \value{
-A string of search terms that are associated with the specified taxa, formatted for use in the specified database.
+A string of search terms that are associated with the specified taxa,
+ formatted for use in the specified database.
 }
 \description{
-Format non-human primate search terms for use in databases
+Function will return search terms for all taxa below the specified taxonomic
+ level. Search terms for humans are excluded even if they are part of that
+ taxonomic group.
 }
 \examples{
 search_nhp(database = "PsycInfo", taxa = "papio")
-search_nhp(database = "PubMed", taxa = "cercopithecidae", exclude = "papio")
-search_nhp(database = "WebOfScience", taxa = "Platyrrhini", exclude = "Aotus")
+search_nhp(database = "PsycInfo", taxa = "hominidae")
+search_nhp(database = "PubMed", taxa = "cercopithecidae", exclude = c("papio", "macaca"))
+search_nhp(database = "PubMed", taxa = "platyrrhini", exclude = "aotus")
 }
