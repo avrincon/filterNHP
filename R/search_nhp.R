@@ -32,9 +32,9 @@ search_nhp <-
     if(!is.null(taxa))    taxa <- tolower(taxa)
     if(!is.null(exclude)) exclude <- tolower(exclude)
 
-    # check input to function arguments are correct
-    if(!all(taxa %in% correct_taxa_inputs) &
-       all(exclude %in% correct_taxa_inputs)){
+    # check input to function arguments are valid
+    if(!all(taxa %in% correct_taxa_inputs) |
+       !all(exclude %in% correct_taxa_inputs)){
       xx <- c(setdiff(taxa, correct_taxa_inputs),
               setdiff(exclude, correct_taxa_inputs))
       stop(paste("These terms are not valid taxa inputs:",
