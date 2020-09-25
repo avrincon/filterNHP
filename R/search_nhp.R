@@ -4,12 +4,15 @@
 #'  level. Search terms for humans are excluded even if they are part of that
 #'  taxonomic group.
 #'
-#' @param database A string indicating which database search terms should be formatted for. Current options are "PubMed" (default), "PsycInfo" or "WebOfScience".
+#' @param database A string indicating which database search terms should be
+#'  formatted for. Current options are "PubMed" (default), "PsycInfo" or
+#'  "WebOfScience".
 #' @param taxa A character vector of primate taxa. If `taxa = NULL` (default),
 #'  function will return search terms for all non-human primates.
-#' @param exclude An optional character vector of primate taxa to exclude from
-#' the search terms. This is useful for example when you need search terms for
-#' all species of one family except one genus.
+#' @param exclude An optional character vector of primate taxonomic groups that
+#'  occur within taxa to exclude from the search terms. This is useful for
+#'  example when you need search terms for all species of one family except one
+#'  genus.
 #'
 #' @return A string of search terms that are associated with the specified taxa,
 #'  formatted for use in the specified database.
@@ -21,18 +24,29 @@
 #' @examples
 #' search_nhp(database = "PsycInfo", taxa = "papio")
 #' search_nhp(database = "PsycInfo", taxa = "hominidae")
-#' search_nhp(database = "PubMed", taxa = "cercopithecidae", exclude = c("papio", "macaca"))
+#' search_nhp(database = "PubMed", taxa = "cercopithecidae", exclude =
+#'   c("papio", "macaca"))
 #' search_nhp(database = "PubMed", taxa = "platyrrhini", exclude = "aotus")
 search_nhp <-
   function(database = "PubMed",
            taxa = NULL,
            exclude = NULL) {
 
+    # remove _ - and " "
+    db <- gsub("|_|-| ", "", database)
+    db <- tolower(db)
+
     # convert tolower so that input is case insensitive
     if(!is.null(taxa))    taxa <- tolower(taxa)
     if(!is.null(exclude)) exclude <- tolower(exclude)
 
     # check input to function arguments are valid
+    if(!db %in% c("pubmed", "psycinfo", "webofscience")){
+      stop(paste(database,
+                 "is not a valid database. Please choose one from: PubMed, PsycInfo or WebOfScience."))
+    }
+
+
     if(!all(taxa %in% correct_taxa_inputs) |
        !all(exclude %in% correct_taxa_inputs)){
       xx <- c(setdiff(taxa, correct_taxa_inputs),
@@ -46,13 +60,13 @@ search_nhp <-
       taxa <- c("nhps", taxa)
     }
 
-    if(database == "PubMed"){
+    if(db == "pubmed"){
       term <- format_pubmed_terms(taxa, exclude)
 
-    } else if(database == "PsycInfo"){
+    } else if(db == "psycinfo"){
       term <- format_psycinfo_terms(taxa, exclude)
 
-    } else if(database == "WebOfScience"){
+    } else if(db == "webofscience"){
       term <- format_wos_terms(taxa, exclude)
     }
 
