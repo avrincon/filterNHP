@@ -90,13 +90,14 @@ format_general_terms <- function(d, taxa) {
   dQuote(d3$term)
 }
 
-check_higher_taxon_bracket <- function(taxa) {
+check_single_higher_taxon <- function(taxon) {
+  # taxon: single length character
   # checks if there is only one taxonomic group below specified level
-  x <- FindNode(primate_tree, taxa)
+  x <- FindNode(primate_tree, taxon)
 
-  # if there is more than one group, then this group should not be excluded so return original taxa
+  # if there is more than one group, then this group should not be excluded so return original taxon
   if(x$height != x$Get("totalCount")[[1]]){
-    return(taxa)
+    return(taxon)
   }
 
   # if there is only one group, move down tree
@@ -109,6 +110,17 @@ check_higher_taxon_bracket <- function(taxa) {
 
   child[child!="na"]
 }
+
+check_higher_taxon_bracket <- function(taxa) {
+  # loops over check_higher_taxon() in case user wants to exclude multiple taxa
+  out <- vector("list", length = length(taxa))
+
+  for (i in seq_along(taxa)){
+    out[[i]] <- check_single_higher_taxon(taxa[i])
+  }
+  unlist(out, use.names = FALSE)
+}
+
 
 # format pubmed -----------------------------------------------------------
 
