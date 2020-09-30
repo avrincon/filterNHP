@@ -7,6 +7,17 @@
 
 # ui ----------------------------------------------------------------------
 
+pt <-
+  list(
+    suborder = c("strepsirrhini", "haplorrhini"),
+    infraorder = c("lemuriformes", "chiromyiformes", "lorisiformes", "tarsiiformes", "simiiformes"),
+    parvorder = c("platyrrhini", "catarrhini"),
+    superfamily = c("cercopithecoidea", "hominoidea"),
+    family = c("lemuridae", "lepilemuridae", "cheirogaleidae", "indriidae", "daubentoniidae", "lorisidae", "galagidae", "tarsiidae", "cebidae", "aotidae", "atelidae", "pitheciidae", "cercopithecidae", "hylobatidae", "hominidae"),
+    subfamily = c("perodicticinae", "lorinae", "callitrichinae", "cebinae", "saimiriinae", "alouattinae", "atelinae", "pithecinae", "callicebinae", "cercopithecinae", "colobinae", "ponginae", "homininae"),
+    tribe = c("cercopithecini", "papionini", "gorillini", "hominini"),
+    genus = c("lemur", "eulemur", "varecia", "hapalemur", "prolemur", "lepilemur", "cheirogaleus", "microcebus", "mirza", "allocebus", "phaner", "indri", "avahi", "propithecus", "daubentonia", "arctocebus", "perodicticus", "pseudopotto", "loris", "nycticebus", "galago", "euoticus", "galagoides", "otolemur", "paragalago", "sciurocheirus", "carlito", "cephalopachus", "tarsius", "cebuella", "callibella", "mico", "callithrix", "callimico", "saguinus", "leontocebus", "leontopithecus", "cebus", "sapajus", "saimiri",  "aotus", "aloutta", "ateles", "brachyteles", "lagothrix", "oreonax", "cacajao", "chiropotes", "pithecia", "plecturocebus", "callicebus", "cheracebus", "allenopithecus", "miopithecus", "erythrocebus", "chlorocebus", "cercopithecus", "macaca", "cercocebus", "lophocebus", "rungwecebus", "papio", "theropithecus", "mandrillus", "colobus", "piliocolobus", "procolobus", "semnopithecus", "trachypithecus", "presbytis", "pygathrix", "rhinopithecus", "nasalis", "simias", "hoolock", "hylobates", "nomascus", "symphalangus", "pongo", "gorilla", "pan")
+  )
 
 
 ui <- fluidPage(
@@ -23,40 +34,50 @@ ui <- fluidPage(
                 choices = c("PubMed", "PsycInfo", "WebOfScience"),
                 selected = "PubMed"),
 
-    checkboxGroupInput(inputId = "taxon_input", label = "taxon",
-                       # choices = names(ta)[6:length(names(ta))],
-                       choices = c("NHPs"),
-                       selected = "NHPs"),
+    checkboxGroupInput(inputId = "all_nhp_input",
+                       label = NULL,
+                       choices = c("all non-human primates"),
+                       selected = "all non-human primates"),
 
-    checkboxGroupInput(inputId = "suborder_input", label = "suborder",
-                       choices = c("strepsirrhini", "haplorrhini")),
+    checkboxGroupInput(inputId = "suborder_input",
+                       label = "suborder",
+                       choices = pt$suborder),
 
-    checkboxGroupInput(inputId = "infraorder_input", label = "infraorder",
-                       choices = c("lorisiformes", "chiromyiformes", "lemuriformes", "tarsiiformes", "simiiformes")),
+    checkboxGroupInput(inputId = "infraorder_input",
+                       label = "infraorder",
+                       choices = pt$infraorder),
 
-    checkboxGroupInput(inputId = "parvorder_input", label = "parvorder",
-                       choices = c("platyrrhini", "catarrhini")),
+    checkboxGroupInput(inputId = "parvorder_input",
+                       label = "parvorder",
+                       choices = pt$parvorder),
 
-    checkboxGroupInput(inputId = "superfamily_input", label = "superfamily",
-                       choices = c("lemuroidea", "lorisoidea", "cercopithecoidea", "hominoidea")),
+    checkboxGroupInput(inputId = "superfamily_input",
+                       label = "superfamily",
+                       choices = pt$superfamily),
 
-    checkboxGroupInput(inputId = "family_input", label = "family",
-                       choices = c("cercopithecidae", "hominidae", "hylobatidae", "cebidae", "aotidae", "atelidae", "pitheciidae", "tarsiidae", "lemuridae", "cheirogaleidae", "lepilemuridae", "indriidae", "daubentoniidae", "lorisidae", "galagidae")),
+    checkboxGroupInput(inputId = "family_input",
+                       label = "family",
+                       choices = pt$family),
 
-    checkboxGroupInput(inputId = "subfamily_input", label = "subfamily",
-                       choices = c("callitrichinae", "cebinae", "alouattinae", "atelinae", "callicebinae", "saimirinae", "pithecinae", "cercopithecinae", "colobinae", "perodicticinae", "lorinae", "ponginae", "homininae")),
+    checkboxGroupInput(inputId = "subfamily_input",
+                       label = "subfamily",
+                       choices = pt$subfamily),
 
-    checkboxGroupInput(inputId = "tribe_input", label = "tribe",
-                       choices = c("hominini", "gorillini", "cercopithecini", "papionini")),
+    checkboxGroupInput(inputId = "tribe_input",
+                       label = "tribe",
+                       choices = pt$tribe),
 
-    checkboxGroupInput(inputId = "genus_input", label = "genus",
-                       choices = c("cheirogaleus", "microcebus", "mirza", "allocebus", "phaner", "daubentonia", "indri", "avahi", "propithecus", "eulemur", "varecia", "hapalemur", "prolemur", "lepilemur", "lemur", "arctocebus", "perodicticus", "pseudopotto", "loris", "nycticebus", "galago", "euoticus", "otolemur", "paragalago", "sciurocheirus", "galagoides", "carlito", "cephalopachus", "tarsius", "cebuella", "callibella", "mico", "callithrix", "callimico", "saguinus", "leontocebus", "leontopithecus", "cebus", "sapajus", "saimiri", "aotus", "plecturocebus", "callicebus", "cheracebus", "cacajao", "chiropotes", "pithecia", "aloutta", "ateles", "brachyteles", "lagothrix", "oreonax", "allenopithecus", "miopithecus", "erythrocebus", "chlorocebus", "cercopithecus", "macaca", "cercocebus", "lophocebus", "rungwecebus", "papio", "theropithecus", "mandrillus", "colobus", "piliocolobus", "procolobus", "semnopithecus", "trachypithecus", "presbytis", "pygathrix", "rhinopithecus", "nasalis", "simias", "hoolock", "hylobates", "nomascus", "symphalangus", "pongo", "gorilla", "pan")),
+    checkboxGroupInput(inputId = "genus_input",
+                       label = "genus",
+                       choices = pt$genus),
 
 
   ),
 
+  # include image of primate tree?
+  # tags$img(src='www/primate-order.png'))
+
   mainPanel(
-    # imageOutput("primate_tree"),
     img(src = 'sw_sketch.png', height = '294px', width = '434px'),
 
     textOutput("search_terms")
@@ -65,7 +86,6 @@ ui <- fluidPage(
 
 server <- function(input, output) {
 
-  # output$results <- renderPrint(search_terms)
   output$search_terms <-
     renderPrint(search_nhp(database = input$database_input,
                            taxa = c(
