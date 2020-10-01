@@ -142,10 +142,10 @@ format_pubmed_mesh <- function(taxa) {
   xx <- sapply(pm3[ , 2:ncol(pm3), drop = F], function(x) x == "ne")
 
   # cannot do rowSums when matrix/vector has length 1, so use regular sum()
-  if(is.vector(xx) == 1){
+  if(is.vector(xx)){
     pm3$mesh <- ifelse(sum(xx, na.rm = T) > 0, "[mh]", "[mh:noexp]")
   }
-  if(is.matrix(xx) > 1){
+  if(is.matrix(xx)){
     pm3$mesh <- ifelse(rowSums(xx, na.rm = T) > 0, "[mh]", "[mh:noexp]")
   }
 
