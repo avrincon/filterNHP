@@ -140,6 +140,7 @@ format_pubmed_mesh <- function(taxa) {
 
   # otherwise check if terms should be exploded or not
   xx <- sapply(pm3[ , 2:ncol(pm3), drop = F], function(x) x == "ne")
+  xx <- xx[!is.na(xx)]
 
   # cannot do rowSums when matrix/vector has length 1, so use regular sum()
   if(length(xx) == 1){
