@@ -4,34 +4,44 @@
 \alias{search_nhp}
 \title{Format non-human primate search terms for use in databases}
 \usage{
-search_nhp(database = "PubMed", taxa = NULL, exclude = NULL)
+search_nhp(database = "PubMed", taxa = NULL, exclude = NULL, simplify = TRUE)
 }
 \arguments{
 \item{database}{A string indicating which database search terms should be
 formatted for. Current options are "PubMed" (default), "PsycInfo" or
 "WebOfScience".}
 
-\item{taxa}{A character vector of primate taxa. If `taxa = NULL` (default),
-function will return search terms for all non-human primates.}
+\item{taxa}{A character vector of primate taxa. If \code{taxa = NULL}
+(default), function will return search terms for all non-human primates.}
 
 \item{exclude}{An optional character vector of primate taxonomic groups that
 occur within taxa to exclude from the search terms. This is useful for
 example when you need search terms for all species of one family except one
 genus.}
+
+\item{simplify}{Logical. Should printed output be simplified?}
 }
 \value{
-A string of search terms that are associated with the specified taxa,
- formatted for use in the specified database.
+\code{NULL} or a string of search terms that are associated with the
+  specified taxa, formatted for use in the specified database.
 }
 \description{
 Function will return search terms for all taxa below the specified taxonomic
- level. Search terms for humans are excluded even if they are part of that
- taxonomic group.
+level. Search terms for humans are excluded even if they are part of that
+taxonomic group.
+}
+\details{
+If \code{simplify = TRUE} (default), then function will will print
+  search terms to the console, excluding unecessary quotes ("") and index
+  ([1]), so that can it can be directly copy-pasted into the relevant
+  database. However, the object returned is \code{NULL}. If \code{simplify =
+  FALSE}, then function returns a length one character vector. This may be
+  useful if the user wants to assign the output to r objects for further
+  manipulation.
 }
 \examples{
 search_nhp(database = "PsycInfo", taxa = "papio")
 search_nhp(database = "PsycInfo", taxa = "hominidae")
-search_nhp(database = "PubMed", taxa = "cercopithecidae", exclude =
-  c("papio", "macaca"))
+search_nhp(database = "PubMed", taxa = "cercopithecidae", exclude = c("papio", "macaca"))
 search_nhp(database = "PubMed", taxa = "platyrrhini", exclude = "aotus")
 }
