@@ -14,7 +14,10 @@ Depends:
     R (>= 3.3.0)
 RoxygenNote: 7.1.1
 Suggests: 
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
 Imports: 
     data.tree (>= 1.0.0),
     shiny
+VignetteBuilder: knitr

@@ -1,0 +1,76 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# searchNHP
+
+Non-human primate search filter terms
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of searchNHP is to is to provide users with an easy way to obtain a comprehensive list of search filters to use in popular databases such as PubMed, PsicInfo and Web of Science.
+
+## Installation
+
+You can install the released version of searchNHP from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("searchNHP")
+```
+
+And the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("avrincon/searchNHP")
+```
+## Example
+
+```{r example}
+library(searchNHP)
+## basic example code
+```
+
+The core function of this package is search_nhp().
+
+The function arguments are:
+
+
+By default the function returns search terms for all non-human primates.
+
+```{r}
+# by default function returns search terms for all NHPs
+search_nhp(database = "PubMed")
+```
+
+Or you can explicitly specify all NHPs (gives same result as above)
+
+```{r}
+search_nhp(database = "PubMed", taxa = "NHPs")
+```
+
+You can specify single taxa or several
+
+```{r}
+search_nhp(database = "PsycInfo", taxa = "macaca")
+search_nhp(database = "WebOfScience", taxa = c("papio", "theropithecus", "mandrillus"))
+```
+
+You can also exclude a taxonomic group(s) that occurs within "taxa"
+
+```{r}
+search_nhp(database = "WebOfScience", taxa = "hominidae", exclude = "pongo")
+```
+
