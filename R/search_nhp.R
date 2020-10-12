@@ -46,7 +46,7 @@ search_nhp <-
                  "is not a valid database. Please choose one from: PubMed, PsycInfo or WebOfScience."))
     }
 
-
+    # check that taxa inputs are valid
     if(!all(taxa %in% correct_taxa_inputs) |
        !all(exclude %in% correct_taxa_inputs)){
       xx <- c(setdiff(taxa, correct_taxa_inputs),
@@ -55,7 +55,12 @@ search_nhp <-
                  paste(xx, collapse = ", ")))
     }
 
-    # by default (when all taxa = NULL), function will return search terms for all non-human primates
+    # use parent taxa for search terms if all siblings have been included
+    complete_sibs <- get_complete_siblings(taxa)
+    parents <- get_parents(taxa)
+    taxa <- c(taxa[!taxa %in% complete_sibs], parents)
+
+    # by default (when taxa = NULL), function will return search terms for all non-human primates
     if(is.null(taxa)){
       taxa <- c("nhps", taxa)
     }
@@ -121,6 +126,46 @@ check_higher_taxon_bracket <- function(taxa) {
   unlist(out, use.names = FALSE)
 }
 
+get_parents <- function(taxa) {
+  # if all siblings are included in taxa,
+  # then get parent taxa to include in search terms
+
+  parents <- NULL
+
+  for (i in seq_along(taxa)){
+    x <- FindNode(primate_tree, taxa[i])
+    x2 <- x$siblings
+
+    sibs <- unlist(lapply(x2, function(a) a$name), use.names = FALSE)
+
+    if (all(sibs %in% taxa)){ # if sibs is empty, all() returns TRUE
+      parents[i] <- x$parent$name
+      while (parents[i] == "na"){
+        x <- x$parent
+        parents[i] <- x$parent$name
+      }
+    }
+  }
+  parents <- unique(parents)
+  parents[!is.na(parents)]
+}
+
+get_complete_siblings <- function(taxa) {
+
+  complete_sibs <- vector("list", length = length(taxa))
+
+  for (i in seq_along(taxa)){
+    x <- FindNode(primate_tree, taxa[i])
+    x2 <- x$siblings
+
+    sibs <- unlist(lapply(x2, function(a) a$name), use.names = FALSE)
+
+    if (all(sibs %in% taxa)){ # if sibs is empty, all() returns TRUE
+      complete_sibs[[i]] <- c(taxa[i], sibs)
+    }
+  }
+  unique(unlist(complete_sibs))
+}
 
 # format pubmed -----------------------------------------------------------
 
@@ -131,7 +176,7 @@ format_pubmed_mesh <- function(taxa) {
   # keep rows where at least one taxa column is not NA, and is lower level taxa
   pm3 <- pm2[rowSums(sapply(pm2[ , 2:ncol(pm2), drop = FALSE],
                             function(x) x %in% c("ne", "nn")),
-                     na.rm = T) > 0, ]
+                     na.rm = TRUE) > 0, ]
 
   # if nrow is 0, there are no mesh terms, return empty object
   if(nrow(pm3) == 0){
@@ -143,10 +188,10 @@ format_pubmed_mesh <- function(taxa) {
 
   # cannot do rowSums when matrix/vector has length 1, so use regular sum()
   if(is.vector(xx)){
-    pm3$mesh <- ifelse(sum(xx, na.rm = T) > 0, "[mh]", "[mh:noexp]")
+    pm3$mesh <- ifelse(sum(xx, na.rm = TRUE) > 0, "[mh]", "[mh:noexp]")
   }
   if(is.matrix(xx)){
-    pm3$mesh <- ifelse(rowSums(xx, na.rm = T) > 0, "[mh]", "[mh:noexp]")
+    pm3$mesh <- ifelse(rowSums(xx, na.rm = TRUE) > 0, "[mh]", "[mh:noexp]")
   }
 
   # quote terms
