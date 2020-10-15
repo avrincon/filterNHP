@@ -7,20 +7,22 @@
 #' @param database A string indicating which database search terms should be
 #'   formatted for. Current options are "PubMed" (default), "PsycInfo" or
 #'   "WebOfScience".
-#' @param taxa A character vector of primate taxa. If \code{taxa = NULL}
-#'   (default), function will return search terms for all non-human primates.
+#' @param taxa A character vector of primate taxa. If \code{taxa =
+#'   "nonhuman_primates"} (default), function will return search terms for all
+#'   non-human primates. Use \code{\link{get_nhp_taxa}} to return a list of
+#'   valid taxonomic terms.
 #' @param exclude An optional character vector of primate taxonomic groups that
 #'   occur within taxa to exclude from the search terms. This is useful for
 #'   example when you need search terms for all species of one family except one
 #'   genus.
 #' @param simplify Logical. Should printed output be simplified?
 #'
-#' @details If \code{simplify = TRUE} (default), then function will will print
-#'   search terms to the console, excluding unecessary quotes ("") and index
-#'   ([1]), so that can it can be directly copy-pasted into the relevant
-#'   database. However, the object returned is \code{NULL}. If \code{simplify =
-#'   FALSE}, then function returns a length one character vector. This may be
-#'   useful if the user wants to assign the output to r objects for further
+#' @details If \code{simplify = TRUE} (default), then function will print search
+#'   terms to the console, excluding unnecessary quotes ("") and index ([1]), so
+#'   that can it can be directly copy-pasted into the relevant database.
+#'   However, the object returned is \code{NULL}. If \code{simplify = FALSE},
+#'   then function returns a character vector of length == 1. This may be useful
+#'   if the user wants to assign the output to an r object for further
 #'   manipulation.
 #'
 #' @return \code{NULL} or a string of search terms that are associated with the
@@ -37,13 +39,13 @@
 #' search_nhp(database = "PubMed", taxa = "platyrrhini", exclude = "aotus")
 search_nhp <-
   function(database = "PubMed",
-           taxa = NULL,
+           taxa = "nonhuman_primates",
            exclude = NULL,
            simplify = TRUE) {
 
     # remove _ - and " "
-    db <- gsub("|_|-| ", "", database)
-    db <- tolower(db)
+    db <- tolower(database)
+    db <- gsub("|_|-| ", "", db)
 
     # convert tolower so that input is case insensitive
     if(!is.null(taxa))    taxa <- tolower(taxa)
@@ -69,9 +71,9 @@ search_nhp <-
     parents <- get_parents(taxa)
     taxa <- c(taxa[!taxa %in% complete_sibs], parents)
 
-    # by default (when taxa = NULL), function will return search terms for all non-human primates
+    # if taxa = NULL, return nothing. This behavior is useful for the shiny app.
     if(is.null(taxa)){
-      taxa <- c("nhps", taxa)
+      return(cat(""))
     }
 
     if(db == "pubmed"){
@@ -143,20 +145,16 @@ get_parents <- function(taxa) {
 
   for (i in seq_along(taxa)){
     x <- FindNode(primate_tree, taxa[i])
-    x2 <- x$siblings
-
-    sibs <- unlist(lapply(x2, function(a) a$name), use.names = FALSE)
+    sibs <- names(x$siblings)
 
     if (all(sibs %in% taxa)){ # if sibs is empty, all() returns TRUE
       parents[i] <- x$parent$name
-      while (parents[i] == "na"){
-        x <- x$parent
-        parents[i] <- x$parent$name
-      }
     }
   }
   parents <- unique(parents)
   parents[!is.na(parents)]
+  # parents <- gsub(pattern = "all", replacement = "nhps", parents)
+  parents
 }
 
 get_complete_siblings <- function(taxa) {
@@ -173,7 +171,8 @@ get_complete_siblings <- function(taxa) {
       complete_sibs[[i]] <- c(taxa[i], sibs)
     }
   }
-  unique(unlist(complete_sibs))
+  complete_sibs <- unique(unlist(complete_sibs))
+  complete_sibs[complete_sibs != "nonhuman_primates"]
 }
 
 # format pubmed -----------------------------------------------------------

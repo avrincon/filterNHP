@@ -4,15 +4,22 @@
 \alias{search_nhp}
 \title{Format non-human primate search terms for use in databases}
 \usage{
-search_nhp(database = "PubMed", taxa = NULL, exclude = NULL, simplify = TRUE)
+search_nhp(
+  database = "PubMed",
+  taxa = "nonhuman_primates",
+  exclude = NULL,
+  simplify = TRUE
+)
 }
 \arguments{
 \item{database}{A string indicating which database search terms should be
 formatted for. Current options are "PubMed" (default), "PsycInfo" or
 "WebOfScience".}
 
-\item{taxa}{A character vector of primate taxa. If \code{taxa = NULL}
-(default), function will return search terms for all non-human primates.}
+\item{taxa}{A character vector of primate taxa. If \code{taxa =
+"nonhuman_primates"} (default), function will return search terms for all
+non-human primates. Use \code{\link{get_nhp_taxa}} to return a list of
+valid taxonomic terms.}
 
 \item{exclude}{An optional character vector of primate taxonomic groups that
 occur within taxa to exclude from the search terms. This is useful for
@@ -31,12 +38,12 @@ level. Search terms for humans are excluded even if they are part of that
 taxonomic group.
 }
 \details{
-If \code{simplify = TRUE} (default), then function will will print
-  search terms to the console, excluding unecessary quotes ("") and index
-  ([1]), so that can it can be directly copy-pasted into the relevant
-  database. However, the object returned is \code{NULL}. If \code{simplify =
-  FALSE}, then function returns a length one character vector. This may be
-  useful if the user wants to assign the output to r objects for further
+If \code{simplify = TRUE} (default), then function will print search
+  terms to the console, excluding unnecessary quotes ("") and index ([1]), so
+  that can it can be directly copy-pasted into the relevant database.
+  However, the object returned is \code{NULL}. If \code{simplify = FALSE},
+  then function returns a character vector of length == 1. This may be useful
+  if the user wants to assign the output to an r object for further
   manipulation.
 }
 \examples{
