@@ -19,5 +19,6 @@ Suggests:
     rmarkdown
 Imports: 
     data.tree (>= 1.0.0),
-    shiny
+    shiny,
+    shinyWidgets
 VignetteBuilder: knitr
