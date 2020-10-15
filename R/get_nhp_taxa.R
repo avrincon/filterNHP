@@ -16,10 +16,11 @@ get_nhp_taxa <- function(level = "all") {
 
   if(!all(level %in% c("all", names(primate_taxa)))){
     xx <- c(setdiff(level, correct_taxa_inputs))
-    stop(paste("These terms are not valid taxonomic levels:",
-               paste(xx, collapse = ", "),
-               "Please choose from:",
-               names(primate_taxa)))
+    stop(paste0(
+      c(dQuote(xx),
+        "is not a valid taxonomic level. Please choose from:",
+        paste0(names(primate_taxa), collapse = ", ")),
+      collapse = " "))
   }
 
 
