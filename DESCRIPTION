@@ -1,6 +1,6 @@
-Package: searchNHP
+Package: filterNHP
 Type: Package
-Title: Non-human Primate Search Filter Terms
+Title: Non-human Primate Search Filters
 Version: 0.0.0.9000
 Authors@R: person("Alan", "Rincon", email = "avrincon1@gmail.com",
                   role = c("aut", "cre"))

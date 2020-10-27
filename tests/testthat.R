@@ -1,4 +1,4 @@
 library(testthat)
-library(searchNHP)
+library(filterNHP)
 
-test_check("searchNHP")
+test_check("filterNHP")

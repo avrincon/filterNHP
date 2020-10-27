@@ -13,37 +13,41 @@ knitr::opts_chunk$set(
 )
 ```
 
-# searchNHP
+# filterNHP
 
-Non-human primate search filter terms
+Non-human primate search filters
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of searchNHP is to is to provide users with an easy way to obtain a comprehensive list of search filters to use in popular databases such as PubMed, PsicInfo and Web of Science.
+The goal of filterNHP is to is to provide users with an easy way to obtain a comprehensive search filters to use in popular databases such as 
+[PubMed](https://pubmed.ncbi.nlm.nih.gov/), 
+[PsycInfo](http://search.ebscohost.com/Login.aspx?profile=web&defaultdb=psyh&lp=login.asp&ref=https%3A%2F%2Fwww%2Egoogle%2Ecom%2F&authtype=ip,uid) 
+and 
+[Web of Science](http://login.webofknowledge.com/error/Error?Error=IPError&PathInfo=%2F&RouterURL=http%3A%2F%2Fwww.webofknowledge.com%2F&Domain=.webofknowledge.com&Src=IP&Alias=WOK5).
 
 ## Installation
 
-You can install the released version of searchNHP from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of filterNHP from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("searchNHP")
+install.packages("filterNHP")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("avrincon/searchNHP")
+devtools::install_github("avrincon/filterNHP")
 ```
 ## Example
 
 ```{r example}
-library(searchNHP)
+library(filterNHP)
 ## basic example code
 ```
 
-The core function of this package is search_nhp().
+The core function of this package is filter_nhp().
 
 The function arguments are:
 
@@ -52,25 +56,25 @@ By default the function returns search terms for all non-human primates.
 
 ```{r}
 # by default function returns search terms for all NHPs
-search_nhp(database = "PubMed")
+filter_nhp(database = "PubMed")
 ```
 
 Or you can explicitly specify all NHPs (gives same result as above)
 
 ```{r}
-search_nhp(database = "PubMed", taxa = "NHPs")
+filter_nhp(database = "PubMed", taxa = "nonhuman_primates")
 ```
 
 You can specify single taxa or several
 
 ```{r}
-search_nhp(database = "PsycInfo", taxa = "macaca")
-search_nhp(database = "WebOfScience", taxa = c("papio", "theropithecus", "mandrillus"))
+filter_nhp(database = "PsycInfo", taxa = "macaca")
+filter_nhp(database = "WebOfScience", taxa = c("papio", "theropithecus", "mandrillus"))
 ```
 
 You can also exclude a taxonomic group(s) that occurs within "taxa"
 
 ```{r}
-search_nhp(database = "WebOfScience", taxa = "hominidae", exclude = "pongo")
+filter_nhp(database = "WebOfScience", taxa = "hominidae", exclude = "pongo")
 ```
 

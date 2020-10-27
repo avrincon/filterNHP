@@ -33,11 +33,11 @@
 #' @import data.tree
 #'
 #' @examples
-#' search_nhp(database = "PsycInfo", taxa = "papio")
-#' search_nhp(database = "PsycInfo", taxa = "hominidae")
-#' search_nhp(database = "PubMed", taxa = "cercopithecidae", exclude = c("papio", "macaca"))
-#' search_nhp(database = "PubMed", taxa = "platyrrhini", exclude = "aotus")
-search_nhp <-
+#' filter_nhp(database = "PsycInfo", taxa = "papio")
+#' filter_nhp(database = "PsycInfo", taxa = "hominidae")
+#' filter_nhp(database = "PubMed", taxa = "cercopithecidae", exclude = c("papio", "macaca"))
+#' filter_nhp(database = "PubMed", taxa = "platyrrhini", exclude = "aotus")
+filter_nhp <-
   function(database = "PubMed",
            taxa = "nonhuman_primates",
            exclude = NULL,
@@ -65,6 +65,10 @@ search_nhp <-
       stop(paste("These terms are not valid taxa inputs:",
                  paste(xx, collapse = ", ")))
     }
+
+    # if("nonhuman_primates" %in% taxa & length(taxa) > 1){
+    #   warning("nonhuman_primates selected with other taxa.")
+    # }
 
     # use parent taxa for search terms if all siblings have been included
     complete_sibs <- get_complete_siblings(taxa)
