@@ -1,0 +1,26 @@
+Suborder	Infraorder	Parvorder	Superfamily	Family	Subfamily	Tribe	Genus
+Strepsirrhini	Lemuriformes			Lemuridae			Eulemur, Hapalemur, Lemur, Prolemur, Varecia
+Strepsirrhini	Lemuriformes			Lepilemuridae			Lepilemur
+Strepsirrhini	Lemuriformes			Cheirogaleidae			Allocebus, Cheirogaleus, Microcebus, Mirza, Phaner
+Strepsirrhini	Lemuriformes			Indriidae			Avahi, Indri, Propithecus
+Strepsirrhini	Chiromyiformes			Daubentoniidae			Daubentonia
+Strepsirrhini	Lorisiformes			Lorisidae	Perodicticinae		Arctocebus, Perodicticus, Pseudopotto
+Strepsirrhini	Lorisiformes			Lorisidae	Lorinae		Loris, Nycticebus
+Strepsirrhini	Lorisiformes			Galagidae			Euoticus, Galago, Galagoides, Otolemur, Paragalago, Sciurocheirus
+Haplorrhini	Tarsiiformes			Tarsiidae			Carlito, Cephalopachus, Tarsius
+Haplorrhini	Simiiformes	Platyrrhini		Cebidae	Callitrichinae		Callibella, Callimico, Callithrix, Cebuella, Leontocebus, Leontopithecus, Mico, Saguinus
+Haplorrhini	Simiiformes	Platyrrhini		Cebidae	Cebinae		Cebus, Sapujus
+Haplorrhini	Simiiformes	Platyrrhini		Cebidae	Saimiriinae		Saimiri
+Haplorrhini	Simiiformes	Platyrrhini		Aotidae			Aotus
+Haplorrhini	Simiiformes	Platyrrhini		Atelidae	Alouattinae		Aloutta
+Haplorrhini	Simiiformes	Platyrrhini		Atelidae	Atelinae		Ateles, Brachyteles, Lagothrix, Lagothrix, Oreonax
+Haplorrhini	Simiiformes	Platyrrhini		Pitheciidae	Pithecinae		Cacajao, Chiropotes, Pithecia
+Haplorrhini	Simiiformes	Platyrrhini		Pitheciidae	Callicebinae		Callicebus, Cheracebus, Plecturocebus
+Haplorrhini	Simiiformes	Catarrhini	Cercopithecoidea	Cercopithecidae	Cercopithecinae	Cercopithecini	Allenopithecus, Cercopithecus, Chlorocebus, Erythrocebus, Miopithecus
+Haplorrhini	Simiiformes	Catarrhini	Cercopithecoidea	Cercopithecidae	Cercopithecinae	Papionini	Cercocebus, Lophocebus, Macaca, Mandrillus, Papio, Rungwecebus, Theropithecus
+Haplorrhini	Simiiformes	Catarrhini	Cercopithecoidea	Cercopithecidae	Colobinae	Colobini	Colobus, Piliocolobus, Procolobus
+Haplorrhini	Simiiformes	Catarrhini	Cercopithecoidea	Cercopithecidae	Colobinae	Presbytini	Nasalis, Presbytis, Pygathrix, Rhinopithecus, Semnopithecus, Simias, Trachypithecus
+Haplorrhini	Simiiformes	Catarrhini	Hominoidea	Hylobatidae			Hoolock, Hylobates, Hylobates, Nomascus, Nomascus, Nomascus, Symphalangus, Symphalangus
+Haplorrhini	Simiiformes	Catarrhini	Hominoidea	Hominidae	Ponginae		Pongo
+Haplorrhini	Simiiformes	Catarrhini	Hominoidea	Hominidae	Homininae	Gorillini	Gorilla
+Haplorrhini	Simiiformes	Catarrhini	Hominoidea	Hominidae	Homininae	Hominini	Homo, Pan
