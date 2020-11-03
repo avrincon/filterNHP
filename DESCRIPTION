@@ -20,5 +20,7 @@ Suggests:
 Imports: 
     data.tree (>= 1.0.0),
     shiny,
-    shinyWidgets
+    shinyWidgets,
+    shinyjs,
+    clipr
 VignetteBuilder: knitr

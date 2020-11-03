@@ -9,7 +9,8 @@ run_filter_nhp_app <- function() {
   appDir <- system.file("app", package = "filterNHP")
 
   if (appDir == "") {
-    stop("Could not find example directory. Try re-installing `filterNHP`.", call. = FALSE)
+    stop("Could not find example directory. Try re-installing `filterNHP`.",
+         call. = FALSE)
   }
 
   shiny::runApp(appDir, display.mode = "normal")
