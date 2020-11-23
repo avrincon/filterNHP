@@ -1,0 +1,10 @@
+#primate_order table, thead, tr, th{
+    border-bottom: 1px solid #000000;
+}
+#primate_order table {
+  min-width: 10000px;
+}
+#primate_order td {
+  /*so Cercopithecoidea and	Cercopithecidae are not too close*/
+  min-width:115px;
+}
