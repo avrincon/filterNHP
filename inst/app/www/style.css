@@ -1,10 +1,88 @@
-#primate_order table, thead, tr, th{
+/*General layout*/
+
+#search_filter {
+  max-width: 1275px;
+  min-height: 20px;
+  border-radius: 25px;
+  border: 2px solid grey;
+  padding: 20px;
+  margin: 15px;
+}
+
+#create {
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+#table_button, #copy_button {
+  background-color: whitesmoke;
+}
+
+
+/*html primate order table layout*/
+
+#primate_order_table table, thead, tr, th{
     border-bottom: 1px solid #000000;
 }
-#primate_order table {
-  min-width: 10000px;
+#primate_order_table table {
+  /* min-width: 1000px;*/
+  max-width: 1275px;
 }
-#primate_order td {
-  /*so Cercopithecoidea and	Cercopithecidae are not too close*/
+#primate_order_table td {
+  /* so Cercopithecoidea and Cercopithecidae are not too close */
   min-width:115px;
 }
+#primate_order_table {
+  margin: 20px;
+}
+
+
+
+/*Experimental*/
+
+
+/*
+#instruction_inputs {
+  min-width: 650px;
+  min-height: 650px;
+  word-wrap:break-word;
+  /*align-items: stretch;
+}
+
+.well {
+  border: 100px;
+}
+
+.p {
+  margin: 100px;
+}
+
+
+#instruction_well {
+  border: 100px;
+  padding: 100px;
+}
+
+.container {
+  display: flex;
+  background-color: skyblue;
+  width: 1300px;
+  align-content: space-around;
+}
+
+.box {
+  background-color: whitesmoke;
+  border-radius: 25px;
+  padding: 20px;
+  width: 500px;
+}
+
+#instruction_inputs {
+  flex-flow: row wrap;
+}
+
+#instruction, #inputs, #test {
+
+  width: 650px;
+}
+*/

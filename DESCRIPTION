@@ -22,5 +22,7 @@ Imports:
     shiny,
     shinyWidgets,
     shinyjs,
-    clipr
+    clipr,
+    shinyBS
 VignetteBuilder: knitr
+
