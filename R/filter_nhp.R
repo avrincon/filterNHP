@@ -157,8 +157,6 @@ get_parents <- function(taxa) {
   }
   parents <- unique(parents)
   parents[!is.na(parents)]
-  # parents <- gsub(pattern = "all", replacement = "nhps", parents)
-  parents
 }
 
 get_complete_siblings <- function(taxa) {
