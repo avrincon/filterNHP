@@ -22,7 +22,7 @@ ui <-
     includeCSS("www/style.css"),
     titlePanel(
       title = div(
-        a(img(src = 'packageHex_20201015.png',
+        a(img(src = 'packageHex_v2_20201201.png',
               height = '75px', width = '75px'),
           href="https://github.com/avrincon/filterNHP"),
         "filterNHP: Non-human primate (NHP) search filter generator"
@@ -38,7 +38,20 @@ ui <-
       wellPanel(
         class = "instruction_well",
         fluidRow(
-          p("Identifying all of the relevant research on a particular topic for literature reviews involving non-human primates (NHPs) can be difficult and time consuming. filterNHP automatizes the creation of search filters for the taxonomic levels of NHPs for three bibliographic databases (PubMed, PsycINFO, and Web of Science). These search filters can be combined with topic search strings using the Boolean operator 'AND' to facilitate the retrieval of all publications related to NHPs and the topic within the specified database."
+          p("Identifying all of the relevant research on a particular topic for literature reviews involving non-human primates (NHPs) can be difficult and time consuming. filterNHP automatizes the creation of search filters for the taxonomic levels of NHPs for three bibliographic databases (",
+          a("PubMed",
+            href = "https://pubmed.ncbi.nlm.nih.gov/",
+            .noWS = "outside"),
+          ", ",
+          a("PsycINFO",
+            href = "http://search.ebscohost.com/Login.aspx?profile=web&defaultdb=psyh&lp=login.asp&ref=https%3A%2F%2Fwww%2Egoogle%2Ecom%2F&authtype=ip,uid",
+            .noWS = "outside"),
+          ", and ",
+          a("Web of Science",
+            href = "http://login.webofknowledge.com/error/Error?Error=IPError&PathInfo=%2F&RouterURL=http%3A%2F%2Fwww.webofknowledge.com%2F&Domain=.webofknowledge.com&Src=IP&Alias=WOK5",
+            .noWS = "outside"),
+          ").",
+          "These search filters can be combined with topic search strings using the Boolean operator 'AND' to facilitate the retrieval of all publications related to NHPs and the topic within the specified database."
             # style="min-width:1000px; word-wrap:break-word;"
           )
         ),
@@ -48,13 +61,14 @@ ui <-
             br(),
             tags$ul(
               tags$li("Select the database of interest"),
-              tags$li('Determine the broadest taxonomic level(s) of NHP desired (see Primate order table) and type in the space below "Taxa to include" in the panel to the right',
+              tags$li('Determine the broadest taxonomic level(s) of NHP desired (see Primate order table) and type it in the space below "Taxa to include" in the panel to the right',
                       tags$ul(
+                        tags$li('If a search filter for all non-human primates is desired, simply tick the checkbox'),
                         tags$li('Exclusion of a sub-group can be specified by typing in the space below "Taxa to exclude"')
                       )
               ),
               tags$li('Hit "Create!"'),
-              tags$li('Copy and paste filter the generated search filter into the corresponding database')
+              tags$li('Copy and paste the generated search filter into the corresponding database')
             )
           )
         ),
@@ -108,19 +122,6 @@ ui <-
 
     div(
       h3(
-        "Primate order",
-        actionButton(inputId = "table_button",
-                     label = "",
-                     icon = icon("minus"))
-      ),
-      div(
-        id = 'primate_order_table',
-        includeHTML("www/primate-order-table.html")
-      )
-    ),
-
-    div(
-      h3(
         "Search Filter",
         actionButton(inputId = "copy_button",
                      "Copy",
@@ -131,7 +132,20 @@ ui <-
         # id = "search_filter",
         textOutput(outputId = "search_filter")
       )
-    )
+    ),
+
+    div(
+      h3(
+        "Primate order",
+        actionButton(inputId = "table_button",
+                     label = "",
+                     icon = icon("minus"))
+      ),
+      div(
+        id = 'primate_order_table',
+        includeHTML("www/primate-order-table.html")
+      )
+    ),
   )
 
 
