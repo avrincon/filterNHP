@@ -9,8 +9,8 @@
 #'   "WebOfScience".
 #' @param taxa A character vector of primate taxa. If \code{taxa =
 #'   "nonhuman_primates"} (default), function will return search terms for all
-#'   non-human primates. Use \code{\link{get_nhp_taxa}} to return a list of
-#'   valid taxonomic terms.
+#'   non-human primates. Use \code{\link{get_nhp_taxa}} to print a list of valid
+#'   taxa.
 #' @param exclude An optional character vector of primate taxonomic groups that
 #'   occur within taxa to exclude from the search terms. This is useful for
 #'   example when you need search terms for all species of one family except one
@@ -18,12 +18,11 @@
 #' @param simplify Logical. Should printed output be simplified?
 #'
 #' @details If \code{simplify = TRUE} (default), then function will print search
-#'   terms to the console, excluding unnecessary quotes ("") and index ([1]), so
-#'   that can it can be directly copy-pasted into the relevant database.
-#'   However, the object returned is \code{NULL}. If \code{simplify = FALSE},
-#'   then function returns a character vector of length == 1. This may be useful
-#'   if the user wants to assign the output to an r object for further
-#'   manipulation.
+#'   terms to the console that can be directly copy-pasted into the relevant
+#'   database as is. However, the object returned is \code{NULL}. If
+#'   \code{simplify = FALSE}, then function returns a character vector of length
+#'   == 1. This may be useful if the user wants to assign the output to an r
+#'   object for further manipulation.
 #'
 #' @return \code{NULL} or a string of search terms that are associated with the
 #'   specified taxa, formatted for use in the specified database.
@@ -62,8 +61,8 @@ filter_nhp <-
        !all(exclude %in% correct_taxa_inputs)){
       xx <- c(setdiff(taxa, correct_taxa_inputs),
               setdiff(exclude, correct_taxa_inputs))
-      stop(paste("These terms are not valid taxa inputs:",
-                 paste(xx, collapse = ", ")))
+      stop(paste0("These terms are not valid taxa: ",
+                  paste(xx, collapse = ", ")))
     }
 
     # if("nonhuman_primates" %in% taxa & length(taxa) > 1){

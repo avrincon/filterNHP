@@ -4,9 +4,9 @@ Title: Non-human Primate Search Filters
 Version: 0.0.0.9000
 Authors@R: person("Alan", "Rincon", email = "avrincon1@gmail.com",
                   role = c("aut", "cre"))
-Description: This package provides a convinient way for researchers to format 
-    search filter terms non-human primates for popular databases such as PubMed 
-    and Web of Science. 
+Description: This package provides a convinient way for researchers to obtain 
+    formatted search filters for non-human primates for popular databases such 
+    as PubMed and Web of Science. 
 License: Apache License (>= 2.0)
 Encoding: UTF-8
 LazyData: true
@@ -25,4 +25,4 @@ Imports:
     clipr,
     shinyBS
 VignetteBuilder: knitr
-
+Config/testthat/edition: 3

@@ -13,14 +13,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-# filterNHP
+# filterNHP <a><img src='inst/app/www/packageHex_v2_20201201.png' align="right" height="139"/></a>
 
-Non-human primate search filters
+Non-human primate search filters.
 
-<!-- badges: start -->
-<!-- badges: end -->
-
-The goal of filterNHP is to is to provide users with an easy way to obtain a comprehensive search filters to use in popular databases such as 
+The goal of `filterNHP` is to is to provide users with an easy way to obtain a comprehensive search filters to use in popular databases such as 
 [PubMed](https://pubmed.ncbi.nlm.nih.gov/), 
 [PsycInfo](http://search.ebscohost.com/Login.aspx?profile=web&defaultdb=psyh&lp=login.asp&ref=https%3A%2F%2Fwww%2Egoogle%2Ecom%2F&authtype=ip,uid) 
 and 
@@ -28,53 +25,56 @@ and
 
 ## Installation
 
-You can install the released version of filterNHP from [CRAN](https://CRAN.R-project.org) with:
+You can install `filterNHP` from [GitHub](https://github.com/) with:
 
 ``` r
-install.packages("filterNHP")
+# install.packages("remotes")
+remotes::install_github("avrincon/filterNHP")
 ```
 
-And the development version from [GitHub](https://github.com/) with:
+A user-friendly Shiny App implementation lives [here] [domain_name].
 
-``` r
-# install.packages("devtools")
-devtools::install_github("avrincon/filterNHP")
-```
+If you have the `filterNHP` package installed, you can launch the Shiny App from the R console with `filterNHP::run_filter_nhp_app()`.
+
 ## Example
 
 ```{r example}
 library(filterNHP)
-## basic example code
 ```
 
-The core function of this package is filter_nhp().
+The core function of this package is `filter_nhp()`.
 
-The function arguments are:
-
-
-By default the function returns search terms for all non-human primates.
+By default the function prints a search filter for all non-human primates.
 
 ```{r}
-# by default function returns search terms for all NHPs
 filter_nhp(database = "PubMed")
 ```
 
-Or you can explicitly specify all NHPs (gives same result as above)
+Or you can explicitly specify all NHPs (gives same result as above).
 
 ```{r}
-filter_nhp(database = "PubMed", taxa = "nonhuman_primates")
+filter_nhp(database = "PubMed", 
+           taxa = "nonhuman_primates")
 ```
 
-You can specify single taxa or several
+You can specify single taxa or several.
 
 ```{r}
-filter_nhp(database = "PsycInfo", taxa = "macaca")
-filter_nhp(database = "WebOfScience", taxa = c("papio", "theropithecus", "mandrillus"))
+filter_nhp(database = "PsycInfo", 
+           taxa = "macaca")
+```
+```{r}
+filter_nhp(database = "WebOfScience", 
+           taxa = c("papio", "theropithecus", "mandrillus"))
 ```
 
-You can also exclude a taxonomic group(s) that occurs within "taxa"
+You can also exclude a taxonomic group(s) that occurs within "taxa".
 
 ```{r}
-filter_nhp(database = "WebOfScience", taxa = "hominidae", exclude = "pongo")
+filter_nhp(database = "WebOfScience", 
+           taxa = "hominidae", 
+           exclude = "pongo")
 ```
+
+To print a list of all taxa options you can use `get_nhp_taxa()`.
 
