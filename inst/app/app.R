@@ -28,6 +28,7 @@ ui <-
         "filterNHP: Non-human primate (NHP) search filter generator"
       )
     ),
+    h5("version 0.0.1"),
 
     flowLayout(
       cellArgs = list(
@@ -60,15 +61,15 @@ ui <-
             em("Usage:"),
             br(),
             tags$ul(
-              tags$li("Select the database of interest"),
-              tags$li('Determine the broadest taxonomic level(s) of NHP desired (see Primate order table) and type it in the space below "Taxa to include" in the panel to the right',
+              tags$li("Select the database of interest."),
+              tags$li('Determine the broadest taxonomic level(s) of NHP desired (see Primate order table) and type it in the space below "Taxa to include" in the panel to the right. Take care to use the correct spelling as shown in the primate order table bellow.',
                       tags$ul(
-                        tags$li('If a search filter for all non-human primates is desired, simply tick the checkbox'),
-                        tags$li('Exclusion of a sub-group can be specified by typing in the space below "Taxa to exclude"')
+                        tags$li('If a search filter for all non-human primates is desired, simply tick the checkbox.'),
+                        tags$li('Exclusion of a sub-group can be specified by typing in the space below "Taxa to exclude".')
                       )
               ),
               tags$li('Hit "Create!"'),
-              tags$li('Copy and paste the generated search filter into the corresponding database')
+              tags$li('Copy and paste the generated search filter into the corresponding database.')
             )
           )
         ),
