@@ -229,7 +229,8 @@ format_pubmed_terms <- function(taxa, exclude = NULL) {
   }
 
   paste0(c(sort(mesh_terms),
-           sort(tiab_terms)), collapse = " OR ")
+           sort(tiab_terms)),
+         collapse = " OR ")
 
 }
 
@@ -253,8 +254,8 @@ format_psycinfo_terms <- function(taxa, exclude = NULL) {
     tiab_terms <- setdiff(tiab_terms, excl_tiab_terms)
   }
 
-  it <- paste0(index_terms, collapse = " OR ")
-  tt <- paste0(tiab_terms, collapse = " OR ")
+  it <- paste0(sort(index_terms), collapse = " OR ")
+  tt <- paste0(sort(tiab_terms), collapse = " OR ")
 
   # if there are no index terms, do not include it in the output
   if (length(index_terms) == 0){
@@ -284,7 +285,7 @@ format_wos_terms <- function(taxa, exclude = NULL) {
     general_terms <- setdiff(general_terms, excl_general_terms)
   }
 
-  general_terms <- paste0(general_terms, collapse = " OR ")
+  general_terms <- paste0(sort(general_terms), collapse = " OR ")
 
   wos_title_terms <- paste0("TI=(", general_terms, ")")
   wos_abtract_terms <- paste0("AB=(", general_terms, ")")
@@ -292,5 +293,6 @@ format_wos_terms <- function(taxa, exclude = NULL) {
 
   paste0(c(wos_title_terms,
            wos_abtract_terms,
-           wos_author_keywords_terms), collapse = " OR ")
+           wos_author_keywords_terms),
+         collapse = " OR ")
 }
