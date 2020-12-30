@@ -28,125 +28,139 @@ ui <-
         "filterNHP: Non-human primate (NHP) search filter generator"
       )
     ),
+
     h5("version 0.0.1"),
 
-    flowLayout(
-      cellArgs = list(
-        # id = "instruction_inputs",
-        style = "min-width:650px;
+    tabsetPanel(
+      tabPanel(
+        title = "App",
+
+        flowLayout(
+          cellArgs = list(
+            # id = "instruction_inputs",
+            style = "min-width:650px;
                  word-wrap:break-word;"
-      ),
-      wellPanel(
-        class = "instruction_well",
-        fluidRow(
-          p("Identifying all of the relevant research on a particular topic for literature reviews involving non-human primates (NHPs) can be difficult and time consuming. filterNHP automatizes the creation of search filters for the taxonomic levels of NHPs for three bibliographic databases (",
-          a("PubMed",
-            href = "https://pubmed.ncbi.nlm.nih.gov/",
-            .noWS = "outside"),
-          ", ",
-          a("PsycINFO",
-            href = "http://search.ebscohost.com/Login.aspx?profile=web&defaultdb=psyh&lp=login.asp&ref=https%3A%2F%2Fwww%2Egoogle%2Ecom%2F&authtype=ip,uid",
-            .noWS = "outside"),
-          ", and ",
-          a("Web of Science",
-            href = "http://login.webofknowledge.com/error/Error?Error=IPError&PathInfo=%2F&RouterURL=http%3A%2F%2Fwww.webofknowledge.com%2F&Domain=.webofknowledge.com&Src=IP&Alias=WOK5",
-            .noWS = "outside"),
-          ").",
-          "These search filters can be combined with topic search strings using the Boolean operator 'AND' to facilitate the retrieval of all publications related to NHPs and the topic within the specified database."
-            # style="min-width:1000px; word-wrap:break-word;"
-          )
-        ),
-        fluidRow(
-          p(
-            em("Usage:"),
-            br(),
-            tags$ul(
-              tags$li("Select the database of interest."),
-              tags$li('Determine the broadest taxonomic level(s) of NHP desired (see Primate order table) and type it in the space below "Taxa to include" in the panel to the right. Take care to use the correct spelling as shown in the primate order table bellow.',
-                      tags$ul(
-                        tags$li('If a search filter for all non-human primates is desired, simply tick the checkbox.'),
-                        tags$li('Exclusion of a sub-group can be specified by typing in the space below "Taxa to exclude".')
-                      )
-              ),
-              tags$li('Hit "Create!"'),
-              tags$li('Copy and paste the generated search filter into the corresponding database.')
+          ),
+          wellPanel(
+            class = "instruction_well",
+            fluidRow(
+              p("Identifying all of the relevant research on a particular topic for literature reviews involving non-human primates (NHPs) can be difficult and time consuming. filterNHP automatizes the creation of search filters for the taxonomic levels of NHPs for three bibliographic databases (",
+                a("PubMed",
+                  href = "https://pubmed.ncbi.nlm.nih.gov/",
+                  .noWS = "outside"),
+                ", ",
+                a("PsycINFO",
+                  href = "http://search.ebscohost.com/Login.aspx?profile=web&defaultdb=psyh&lp=login.asp&ref=https%3A%2F%2Fwww%2Egoogle%2Ecom%2F&authtype=ip,uid",
+                  .noWS = "outside"),
+                ", and ",
+                a("Web of Science",
+                  href = "http://login.webofknowledge.com/error/Error?Error=IPError&PathInfo=%2F&RouterURL=http%3A%2F%2Fwww.webofknowledge.com%2F&Domain=.webofknowledge.com&Src=IP&Alias=WOK5",
+                  .noWS = "outside"),
+                ").",
+                "These search filters can be combined with topic search strings using the Boolean operator 'AND' to facilitate the retrieval of all publications related to NHPs and the topic within the specified database."
+                # style="min-width:1000px; word-wrap:break-word;"
+              )
+            ),
+            fluidRow(
+              p(
+                em("Usage:"),
+                br(),
+                tags$ul(
+                  tags$li("Select the database of interest."),
+                  tags$li('Determine the broadest taxonomic level(s) of NHP desired (see primate order table) and type it in the space below "Taxa to include" in the panel to the right. Take care to use the correct spelling as shown in the primate order table below.',
+                          tags$ul(
+                            tags$li('If a search filter for all non-human primates is desired, simply tick the checkbox.'),
+                            tags$li('Exclusion of a sub-group can be specified by typing in the space below "Taxa to exclude".')
+                          )
+                  ),
+                  tags$li('Hit "Create!"'),
+                  tags$li('Copy and paste the generated search filter into the corresponding database.')
+                )
+              )
+            ),
+            fluidRow(
+              p("Please cite: Cassidy LC, Leenaars CHC, Rincon AV, Pfefferle D,",
+                '(', em("in review", .noWS = c("outside")), ').',
+                '"Comprehensive search filters for retrieving publications on non-human primates for literature reviews (filterNHP)".',
+                em('American Journal of Primatology', .noWS = c("after")),
+                '.'
+              )
             )
+          ),
+
+          wellPanel(
+            # id = "input_well",
+            selectInput(
+              inputId = "database_input",
+              label = "Database",
+              choices = c("PubMed", "PsycINFO", "Web of Science"),
+              selected = "PubMed"
+            ),
+
+            textInput("include_text", label = "Taxa to include", value = ""),
+            shinyBS::bsTooltip(
+              id = "include_text",
+              title = "Separate multiple with comma and/or space"
+            ),
+
+            checkboxGroupInput(
+              inputId = "all_nhp_input",
+              label = NULL,
+              choiceNames = c("All non-human primates"),
+              choiceValues = c("nonhuman_primates"),
+            ),
+            shinyBS::bsPopover(
+              id = "all_nhp_input",
+              title = "Create search filter for all non-human primates"
+            ),
+
+            textInput("exclude_text", label = "Taxa to exclude", value = ""),
+            shinyBS::bsTooltip(
+              id = "exclude_text",
+              title = "Separate multiple with comma and/or space"
+            ),
+
+            br(),
+            actionButton(inputId = "create", "Create!"),
+            actionButton(inputId = "clear_button", "Clear", icon("eraser"))
           )
         ),
-        fluidRow(
-          p("Please cite: Cassidy LC, Leenaars CHC, Rincon AV, Pfefferle D,",
-            '(', em("in review", .noWS = c("outside")), ').',
-            '"Comprehensive search filters for retrieving publications on non-human primates for literature reviews (filterNHP)".',
-            em('American Journal of Primatology', .noWS = c("after")),
-            '.'
+
+        div(
+          h3(
+            "Search Filter",
+            actionButton(inputId = "copy_button",
+                         "Copy",
+                         icon("copy"))
+          ),
+          h4("Copy search filter and paste in relevant database"),
+          div(
+            # id = "search_filter",
+            textOutput(outputId = "search_filter")
           )
-        )
-      ),
-
-      wellPanel(
-        # id = "input_well",
-        selectInput(
-          inputId = "database_input",
-          label = "Database",
-          choices = c("PubMed", "PsycINFO", "Web of Science"),
-          selected = "PubMed"
         ),
 
-        textInput("include_text", label = "Taxa to include", value = ""),
-        shinyBS::bsTooltip(
-          id = "include_text",
-          title = "Separate multiple with comma and/or space"
+        div(
+          h3(
+            "Primate order",
+            actionButton(inputId = "table_button",
+                         label = "",
+                         icon = icon("minus"))
           ),
-
-        checkboxGroupInput(
-          inputId = "all_nhp_input",
-          label = NULL,
-          choiceNames = c("All non-human primates"),
-          choiceValues = c("nonhuman_primates"),
+          div(
+            id = 'primate_order_table',
+            includeHTML("www/primate-order-table.html")
+          )
         ),
-        shinyBS::bsPopover(
-          id = "all_nhp_input",
-          title = "Create search filter for all non-human primates"
-          ),
-
-        textInput("exclude_text", label = "Taxa to exclude", value = ""),
-        shinyBS::bsTooltip(
-          id = "exclude_text",
-          title = "Separate multiple with comma and/or space"
-          ),
-
-        br(),
-        actionButton(inputId = "create", "Create!"),
-        actionButton(inputId = "clear_button", "Clear", icon("eraser"))
-      )
-    ),
-
-    div(
-      h3(
-        "Search Filter",
-        actionButton(inputId = "copy_button",
-                     "Copy",
-                     icon("copy"))
       ),
-      h4("Copy search filter and paste in relevant database"),
-      div(
-        # id = "search_filter",
-        textOutput(outputId = "search_filter")
+      tabPanel(
+        title = "Version History",
+        h5("version 0.0.1"),
+        p("Original public version.")
       )
-    ),
+    )
 
-    div(
-      h3(
-        "Primate order",
-        actionButton(inputId = "table_button",
-                     label = "",
-                     icon = icon("minus"))
-      ),
-      div(
-        id = 'primate_order_table',
-        includeHTML("www/primate-order-table.html")
-      )
-    ),
+
   )
 
 
