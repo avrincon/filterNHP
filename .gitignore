@@ -2,5 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
+.DS_Store
 notes/
 inst/doc
+data-raw/
