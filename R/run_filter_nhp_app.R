@@ -1,6 +1,6 @@
 #' Run filter_nhp() shiny app
 #'
-#' Runs a user-friendly shiny app that call on `filter_nhp()`.
+#' Runs a user-friendly shiny app that calls on `filter_nhp()`.
 #'
 #' @export
 #'
