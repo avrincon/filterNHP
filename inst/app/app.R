@@ -26,7 +26,8 @@ ui <-
               height = '75px', width = '75px'),
           href="https://github.com/avrincon/filterNHP"),
         "filterNHP: Non-human primate (NHP) search filter generator"
-      )
+      ),
+      windowTitle = "filterNHP: Non-human primate (NHP) search filter generator"
     ),
 
     h5("version 0.0.1"),
@@ -156,7 +157,7 @@ ui <-
       tabPanel(
         title = "Version History",
         h5("version 0.0.1"),
-        p("Original public version.")
+        p("Initial release.")
       )
     )
 
