@@ -4,14 +4,10 @@
 
 library(shiny)
 library(shinyjs)
-# library(shinyWidgets)
 library(shinyBS)
 library(filterNHP)
-# library(clipr)
-
 
 primates <- readRDS("www/primte_taxa.rds")
-d <- read.delim("www/primate_tree_kable.txt")
 
 # ui ----------------------------------------------------------------------
 
@@ -22,7 +18,7 @@ ui <-
     includeCSS("www/style.css"),
     titlePanel(
       title = div(
-        a(img(src = 'packageHex_v2_20201201.png',
+        a(img(src = 'packageHex_v2_20210121.png',
               height = '75px', width = '75px'),
           href="https://github.com/avrincon/filterNHP"),
         "filterNHP: Non-human primate (NHP) search filter generator"
@@ -160,8 +156,6 @@ ui <-
         p("Initial release.")
       )
     )
-
-
   )
 
 
