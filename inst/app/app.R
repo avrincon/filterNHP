@@ -6,15 +6,16 @@ library(shiny)
 library(shinyjs)
 library(shinyBS)
 library(filterNHP)
+library(rclipboard)
 
 primates <- readRDS("www/primte_taxa.rds")
 
 # ui ----------------------------------------------------------------------
 
-
 ui <-
   fluidPage(
     shinyjs::useShinyjs(),
+    rclipboardSetup(),
     includeCSS("www/style.css"),
     titlePanel(
       title = div(
@@ -125,10 +126,9 @@ ui <-
 
         div(
           h3(
-            "Search Filter",
-            actionButton(inputId = "copy_button",
-                         "Copy",
-                         icon("copy"))
+            p("Search Filter",
+              uiOutput(outputId = "clip", inline = TRUE)
+            )
           ),
           h4("Copy search filter and paste in relevant database"),
           div(
@@ -163,6 +163,13 @@ ui <-
 
 
 server <- function(input, output, session) {
+
+  # Add clipboard buttons so it is visible on launch, copy blank
+  output$clip <- renderUI({
+    rclipButton(inputId = "clip_button", label = "Copy",
+                clipText = "",
+                icon("clipboard"))
+  })
 
   # deselect all_nhp_input input if any text is added to include_text input
   # cannot use reactive_taxa() in here (not sure why)
@@ -210,9 +217,23 @@ server <- function(input, output, session) {
     if (nchar(input$exclude_text) == 0){
       v$exclude <- NULL
     }
+
+    # create search filter to copy
+    res <-
+      filter_nhp(database = input$database_input,
+                 taxa = v$taxa,
+                 exclude = v$exclude,
+                 simplify = FALSE)
+
+    # copy search filter to clipboard
+    output$clip <- renderUI({
+      rclipButton(inputId = "clip_button", label = "Copy",
+                  clipText = res,
+                  icon("clipboard"))
+    })
   })
 
-  # print search filter
+  # print search filter to screen
   output$search_filter <-
     renderPrint(
       filter_nhp(
@@ -221,15 +242,6 @@ server <- function(input, output, session) {
         exclude = v$exclude
       )
     )
-
-  # copy filter_nhp() output to clipboard
-  observeEvent(input$copy_button, {
-    clipr::write_clip(
-      filter_nhp(database = input$database_input,
-                 taxa = v$taxa,
-                 exclude = v$exclude,
-                 simplify = FALSE))
-  })
 
   # clear text boxes and search filter
   observeEvent(input$clear_button, {
@@ -241,6 +253,13 @@ server <- function(input, output, session) {
                     value = "")
     v$taxa <- NULL
     v$exclude <- NULL
+
+    # clear clipboard
+    output$clip <- renderUI({
+      rclipButton(inputId = "clip_button", label = "Copy",
+                  clipText = " ",
+                  icon("clipboard"))
+    })
   })
 
   # hide/show primate table after clicking button

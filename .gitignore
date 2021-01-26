@@ -6,3 +6,5 @@
 notes/
 inst/doc
 data-raw/
+rsconnect/
+install_filter_nhp.R
