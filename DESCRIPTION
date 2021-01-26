@@ -23,6 +23,7 @@ Imports:
     shinyWidgets,
     shinyjs,
     clipr,
-    shinyBS
+    shinyBS,
+    rclipboard
 VignetteBuilder: knitr
 Config/testthat/edition: 3
