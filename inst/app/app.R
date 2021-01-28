@@ -9,6 +9,7 @@ library(filterNHP)
 library(rclipboard)
 
 primates <- readRDS("www/primte_taxa.rds")
+taxa_options <- sort(as.vector(unlist(primates)))
 
 # ui ----------------------------------------------------------------------
 
@@ -65,10 +66,10 @@ ui <-
                 br(),
                 tags$ul(
                   tags$li("Select the database of interest."),
-                  tags$li('Determine the broadest taxonomic level(s) of NHP desired (see primate order table) and type it in the space below "Taxa to include" in the panel to the right. Take care to use the correct spelling as shown in the primate order table below.',
+                  tags$li('Determine the broadest taxonomic level(s) of NHP desired (see primate order table) and select option(s) from "Taxa to include" in the panel to the right.',
                           tags$ul(
                             tags$li('If a search filter for all non-human primates is desired, simply tick the checkbox.'),
-                            tags$li('Exclusion of a sub-group can be specified by typing in the space below "Taxa to exclude".')
+                            tags$li('Exclusion of a sub-group can be specified by selecting from "Taxa to exclude".')
                           )
                   ),
                   tags$li('Hit "Create!"'),
@@ -95,10 +96,13 @@ ui <-
               selected = "PubMed"
             ),
 
-            textInput("include_text", label = "Taxa to include", value = ""),
+            selectInput("include_text",
+                        label = "Taxa to include",
+                        choices = taxa_options,
+                        multiple = TRUE),
             shinyBS::bsTooltip(
               id = "include_text",
-              title = "Separate multiple with comma and/or space"
+              title = "Type to filter options"
             ),
 
             checkboxGroupInput(
@@ -112,10 +116,13 @@ ui <-
               title = "Create search filter for all non-human primates"
             ),
 
-            textInput("exclude_text", label = "Taxa to exclude", value = ""),
+            selectInput("exclude_text",
+                        label = "Taxa to exclude",
+                        choices = taxa_options,
+                        multiple = TRUE),
             shinyBS::bsTooltip(
               id = "exclude_text",
-              title = "Separate multiple with comma and/or space"
+              title = "Type to filter options"
             ),
 
             br(),
@@ -150,9 +157,15 @@ ui <-
           )
         ),
       ),
+      # tabPanel(
+      #   title = "FAQ",
+      #   h2("Frequently Asked Questions"),
+      #   h4("I have a question"),
+      #   p("Here is your answer.")
+      # ),
       tabPanel(
         title = "Version History",
-        h5("version 0.0.1"),
+        h4("version 0.0.1"),
         p("Initial release.")
       )
     )
@@ -196,26 +209,16 @@ server <- function(input, output, session) {
   v <- reactiveValues(taxa = NULL,
                       exclude = NULL)
 
-  split_string <- function(string) {
-    # split strings from text input by comma, space and semicolon
-    xx <- unlist(strsplit(string, split = ",|\\s|;"))
-    xx[xx != ""]
-  }
   observeEvent(input$create, {
 
-    if (nchar(input$include_text) > 0){
-      v$taxa <-
-        split_string(input$include_text)
+    if (length(input$include_text) > 0){
+      v$taxa <- input$include_text
     }
-    if (nchar(input$include_text) == 0){
+    if (length(input$include_text) == 0){
       v$taxa <- input$all_nhp_input
     }
-    if (nchar(input$exclude_text) > 0){
-      v$exclude <-
-        split_string(input$exclude_text)
-    }
-    if (nchar(input$exclude_text) == 0){
-      v$exclude <- NULL
+    if (length(input$exclude_text) > 0){
+      v$exclude <- input$exclude_text
     }
 
     # create search filter to copy
