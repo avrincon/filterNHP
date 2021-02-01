@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# filterNHP <a><img src='inst/app/www/packageHex_v2_20201201.png' align="right" height="139"/></a>
+# filterNHP <a><img src='inst/app/www/packageHex_v2_20210121.png' align="right" height="139"/></a>
 
 Non-human primate search filters.
 
