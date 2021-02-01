@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FAQ 1</title>
+  <link href="./www/style.css" type="text/css" rel="stylesheet">
+</head>
+<p>
+  Each bibliographic database queries its library of scientific articles in different ways, which adds a layer for complexity to literature searches, especially when searching multiple databases. We have formatted the NHP search filters to take these differences into account and search publications by their associated index terms (i.e., standardized database terminology labelled as topic-relevant) and other aspects (i.e., title, abstract, author keywords) that ensure that new relevant publications are detected.
+</p>
+
+<br>
+<b>PubMed syntax</b>
+<table class="faq1_table">
+  <tr>
+    <td style="min-width:100px">[mh]</td>
+    <td>Indicates the search term is an index term that automatically includes all index terms nested underneath it.</td>
+  </tr>
+  <tr>
+    <td style="min-width:100px">[mh:noexp]</td>
+    <td>Indicates the search term is an index term that does not include the index terms nested underneath it.</td>
+  </tr>
+  <tr>
+    <td style="min-width:100px">[tiab]</td>
+    <td>Indicates the search term should be searched for in the title and abstract of database publications.</td>
+  </tr>
+</table>
+
+<br>
+<b>PsycINFO syntax</b>
+<table class="faq1_table">
+  <tr>
+    <td>DE()</td>
+    <td>Listed search terms are index terms.</td>
+  </tr>
+  <tr>
+    <td>TX()</td>
+    <td>Listed search terms are searched for in the title and abstract of database publications.</td>
+  </tr>
+</table>
+
+<br>
+<b>Web of Science syntax*</b>
+<table class="faq1_table">
+  <tr>
+    <td>TI=()</td>
+    <td>Listed search terms are searched for in the title of database publications.</td>
+  </tr>
+  <tr>
+    <td>AB=()</td>
+    <td>Listed search terms are searched for in the abstract of database publications.</td>
+  </tr>
+  <tr>
+    <td>AK=()</td>
+    <td>Listed search terms are searched for in the author-defined keywords of database publications.</td>
+  </tr>
+</table>
+
+<p>
+  *Note: we do not use the default syntax of '<i>TS=</i>' (i.e., searches for terms in the <i>'Topic'</i> field) for Web of Science search filters, because it also searches for terms using the database's algorithm called <i>"Keywords Plus"</i>. <i>"Keywords Plus"</i> retrieves publications that are broadly related, but lack the original search terms (e.g., detects publications with terms of other mammal species but no NHP terms), which may increase the time necessary to filter search results for directly topic-relevant publications.
+</p>
+
+<style>
+td.min {
+  width:100px;
+}
+.min {
+  width:100px;
+}
+.noBorder {
+    border:none !important;
+}
+</style>
