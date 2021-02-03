@@ -16,14 +16,12 @@
   background-color: #337ab7;
   border-color: #2e6da4;
 }
-#table_button, #clip_button {
+#clip_button {
   background-color: whitesmoke;
 }
-#faq1_button, #faq2_button, #faq3_button {
+#table_button, #faq1_button, #faq2_button, #faq3_button {
   background-color: white;
   border: none;
-  /* height: 20px;
-  width: 20px; */
 }
 .faq{
   max-width: 800px;
@@ -51,4 +49,5 @@ td {
 }
 .faq1_table td {
     min-width:100px;
+    vertical-align: top;
 }

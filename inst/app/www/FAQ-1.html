@@ -5,22 +5,31 @@
   <link href="./www/style.css" type="text/css" rel="stylesheet">
 </head>
 <p>
-  Each bibliographic database queries its library of scientific articles in different ways, which adds a layer for complexity to literature searches, especially when searching multiple databases. We have formatted the NHP search filters to take these differences into account and search publications by their associated index terms (i.e., standardized database terminology labelled as topic-relevant) and other aspects (i.e., title, abstract, author keywords) that ensure that new relevant publications are detected.
+  Each bibliographic database queries its library of scientific articles in different ways. We have formatted the NHP search filters to take these differences into account and search publications by their associated index terms (i.e., standardized database terminology labelled as topic-relevant) and other aspects (i.e., title, abstract, author keywords) that ensure that new relevant publications are detected. Below are the definitions of each syntax used:
 </p>
+
+<br>
+<b>All databases</b>
+<table class="faq1_table">
+  <tr>
+    <td>*</td>
+    <td>Indicates that the adjacent word is followed by any group of characters, including no character (e.g., the term <i>'galagid*'</i> detects publications referencing <i>'galagid'</i>, <i>'galagids'</i>, and <i>'galagidae'</i>)</td>
+  </tr>
+</table>
 
 <br>
 <b>PubMed syntax</b>
 <table class="faq1_table">
   <tr>
-    <td style="min-width:100px">[mh]</td>
+    <td>[mh]</td>
     <td>Indicates the search term is an index term that automatically includes all index terms nested underneath it.</td>
   </tr>
   <tr>
-    <td style="min-width:100px">[mh:noexp]</td>
+    <td>[mh:noexp]</td>
     <td>Indicates the search term is an index term that does not include the index terms nested underneath it.</td>
   </tr>
   <tr>
-    <td style="min-width:100px">[tiab]</td>
+    <td>[tiab]</td>
     <td>Indicates the search term should be searched for in the title and abstract of database publications.</td>
   </tr>
 </table>
@@ -39,7 +48,7 @@
 </table>
 
 <br>
-<b>Web of Science syntax*</b>
+<b>Web of Science syntax<sup>a</sup></b>
 <table class="faq1_table">
   <tr>
     <td>TI=()</td>
@@ -56,17 +65,6 @@
 </table>
 
 <p>
-  *Note: we do not use the default syntax of '<i>TS=</i>' (i.e., searches for terms in the <i>'Topic'</i> field) for Web of Science search filters, because it also searches for terms using the database's algorithm called <i>"Keywords Plus"</i>. <i>"Keywords Plus"</i> retrieves publications that are broadly related, but lack the original search terms (e.g., detects publications with terms of other mammal species but no NHP terms), which may increase the time necessary to filter search results for directly topic-relevant publications.
+  <sup>a</sup>Note: we do not use the default syntax of <i>'TS='</i> (i.e., searches for terms in the <i>'Topic'</i> field) for Web of Science search filters, because it also searches for terms using the database's algorithm called <i>"Keywords Plus"</i>. <i>"Keywords Plus"</i> retrieves publications that are broadly related, but lack the original search terms (e.g., detects publications with terms of other mammal species but no NHP terms), which may increase the time necessary to filter search results for directly topic-relevant publications.
 </p>
 
-<style>
-td.min {
-  width:100px;
-}
-.min {
-  width:100px;
-}
-.noBorder {
-    border:none !important;
-}
-</style>
