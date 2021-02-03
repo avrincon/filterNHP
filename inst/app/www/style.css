@@ -10,6 +10,7 @@
 }
 #instruction_well, #input_well {
   height: 435px;
+  margin-top: 20px;
 }
 #create {
   color: #fff;
@@ -25,6 +26,7 @@
 }
 .faq{
   max-width: 800px;
+  text-align: justify;
 }
 
 /*table layouts*/
