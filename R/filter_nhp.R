@@ -62,17 +62,13 @@ filter_nhp <-
       xx <- c(setdiff(taxa, correct_taxa_inputs),
               setdiff(exclude, correct_taxa_inputs))
       stop(paste0("These terms are not valid taxa: ",
-                  paste(xx, collapse = ", ")))
+                  paste(xx, collapse = ", "),
+                  ". Use get_nhp_taxa() for get a list of valid options."))
     }
 
     # if("nonhuman_primates" %in% taxa & length(taxa) > 1){
     #   warning("nonhuman_primates selected with other taxa.")
     # }
-
-    # use parent taxa for search terms if all siblings have been included
-    complete_sibs <- get_complete_siblings(taxa)
-    parents <- get_parents(taxa)
-    taxa <- c(taxa[!taxa %in% complete_sibs], parents)
 
     # if taxa = NULL, return nothing. This behavior is useful for the shiny app.
     if(is.null(taxa)){
@@ -131,49 +127,13 @@ check_single_higher_taxon <- function(taxon) {
 }
 
 check_higher_taxon_bracket <- function(taxa) {
-  # loops over check_higher_taxon() in case user wants to exclude multiple taxa
+  # loops over check_single_higher_taxon() in case user wants to exclude multiple taxa
   out <- vector("list", length = length(taxa))
 
   for (i in seq_along(taxa)){
     out[[i]] <- check_single_higher_taxon(taxa[i])
   }
   unlist(out, use.names = FALSE)
-}
-
-get_parents <- function(taxa) {
-  # if all siblings are included in taxa,
-  # then get parent taxa to include in search terms
-
-  parents <- NULL
-
-  for (i in seq_along(taxa)){
-    x <- FindNode(primate_tree, taxa[i])
-    sibs <- names(x$siblings)
-
-    if (all(sibs %in% taxa)){ # if sibs is empty, all() returns TRUE
-      parents[i] <- x$parent$name
-    }
-  }
-  parents <- unique(parents)
-  parents[!is.na(parents)]
-}
-
-get_complete_siblings <- function(taxa) {
-
-  complete_sibs <- vector("list", length = length(taxa))
-
-  for (i in seq_along(taxa)){
-    x <- FindNode(primate_tree, taxa[i])
-    x2 <- x$siblings
-
-    sibs <- unlist(lapply(x2, function(a) a$name), use.names = FALSE)
-
-    if (all(sibs %in% taxa)){ # if sibs is empty, all() returns TRUE
-      complete_sibs[[i]] <- c(taxa[i], sibs)
-    }
-  }
-  complete_sibs <- unique(unlist(complete_sibs))
-  complete_sibs[complete_sibs != "nonhuman_primates"]
 }
 
 # format pubmed -----------------------------------------------------------
