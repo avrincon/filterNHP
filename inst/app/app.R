@@ -247,8 +247,10 @@ server <- function(input, output, session) {
   # takes the input from the text boxes
   # if include text box is empty, it will take input from all nhp checkbox
   v <- reactiveValues(taxa = NULL,
-                      exclude = NULL)
+                      exclude = NULL,
+                      database = "PubMed")
 
+  # update clipboard when changing taxa
   observeEvent(input$create, {
 
     if (length(input$include_text) > 0){
@@ -264,6 +266,42 @@ server <- function(input, output, session) {
       v$taxa <- input$include_text
       v$exclude <- input$exclude_text
     }
+
+    v$database <- input$database_input
+
+    # create search filter to copy
+    res <-
+      filter_nhp(database = input$database_input,
+                 taxa = v$taxa,
+                 exclude = v$exclude,
+                 simplify = FALSE)
+
+    # copy search filter to clipboard
+    output$clip <- renderUI({
+      rclipButton(inputId = "clip_button", label = "Copy",
+                  clipText = res,
+                  icon("clipboard"))
+    })
+  })
+
+  # update clipboard when changing database
+  observeEvent(input$database_input, {
+
+    if (length(input$include_text) > 0){
+      v$taxa <- input$include_text
+    }
+    if (length(c(input$include_text, input$exclude_text)) == 0){
+      v$taxa <- input$all_nhp_input
+    }
+    if (length(input$exclude_text) > 0){
+      v$exclude <- input$exclude_text
+    }
+    if (length(input$exclude_text) == 0 & length(input$include_text) > 0){
+      v$taxa <- input$include_text
+      v$exclude <- input$exclude_text
+    }
+
+    v$database <- input$database_input
 
     # create search filter to copy
     res <-
