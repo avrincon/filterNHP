@@ -32,7 +32,9 @@ You can install `filterNHP` from [GitHub](https://github.com/) with:
 remotes::install_github("avrincon/filterNHP")
 ```
 
-A user-friendly Shiny App implementation lives [here] [domain_name].
+## App
+
+A user-friendly [Shiny App](https://shiny.rstudio.com) implementation can be found at [filternhp.dpz.eu](https://filternhp.dpz.eu).
 
 If you have the `filterNHP` package installed, you can launch the Shiny App from the R console with `filterNHP::run_filter_nhp_app()`.
 
@@ -42,39 +44,48 @@ If you have the `filterNHP` package installed, you can launch the Shiny App from
 library(filterNHP)
 ```
 
-The core function of this package is `filter_nhp()`.
-
-By default the function prints a search filter for all non-human primates.
+The core function of this package is `filter_nhp()`. To create a search filter the user must specify a database and taxa of interest. By default the function prints a search filter for all non-human primates, formatted for PubMed. This is our recommended search filter for conducting a comprehensive literature review on all NHPs. 
 
 ```{r}
-filter_nhp(database = "PubMed")
+filter_nhp()
 ```
 
-Or you can explicitly specify all NHPs (gives same result as above).
+Or you can explicitly specify the database and all NHPs (gives same result as above).
 
 ```{r}
 filter_nhp(database = "PubMed", 
            taxa = "nonhuman_primates")
 ```
 
-You can specify single taxa or several.
+It is also possible to create search filters for any NHP taxon or combination of taxa, down to the genus level. For example
 
 ```{r}
 filter_nhp(database = "PsycInfo", 
-           taxa = "macaca")
+           taxa = "Catarrhini")
 ```
 ```{r}
 filter_nhp(database = "WebOfScience", 
-           taxa = c("papio", "theropithecus", "mandrillus"))
+           taxa = c("Papio", "Theropithecus", "Mandrillus"))
+```
+```{r}
+filter_nhp(database = "PubMed", 
+           taxa = c("Hylobatidae", "Ponginae"))
 ```
 
-You can also exclude a taxonomic group(s) that occurs within "taxa".
+You can also exclude a taxonomic group(s) that occurs within a taxa.
 
 ```{r}
 filter_nhp(database = "WebOfScience", 
-           taxa = "hominidae", 
-           exclude = "pongo")
+           taxa = "Hominidae", 
+           exclude = "Pongo")
 ```
 
 To print a list of all taxa options you can use `get_nhp_taxa()`.
+
+By default, with the argument `simplify = TRUE`, search filters are printed to the console in the appropriate format of the specified database, such that they can be used (copy-pasted) without modification. However, the object returned is `NULL`. If `simplify = FALSE`, then the function returns a character string. This may be useful if the user wants to assign the output to an R object for further manipulation.
+
+```{r}
+filter_nhp(database = "PsycInfo", taxa = "aotus", simplify = TRUE)
+filter_nhp(database = "PsycInfo", taxa = "aotus", simplify = FALSE)
+```
 
