@@ -7,7 +7,7 @@
 filter_nhp(
   database = "PubMed",
   taxa = "nonhuman_primates",
-  exclude = NULL,
+  omit = NULL,
   simplify = TRUE
 )
 }
@@ -21,8 +21,8 @@ formatted for. Current options are "PubMed" (default), "PsycInfo" or
 non-human primates. Use \code{\link{get_nhp_taxa}} to print a list of valid
 taxa.}
 
-\item{exclude}{An optional character vector of primate taxonomic groups that
-occur within taxa to exclude from the search terms. This is useful for
+\item{omit}{An optional character vector of primate taxonomic groups that
+occur within taxa to omit from the search terms. This is useful for
 example when you need search terms for all species of one family except one
 genus.}
 
@@ -34,7 +34,7 @@ genus.}
 }
 \description{
 Function will return search terms for all taxa below the specified taxonomic
-level. Search terms for humans are excluded even if they are part of that
+level. Search terms for humans are omitted even if they are part of that
 taxonomic group.
 }
 \details{
@@ -48,6 +48,6 @@ If \code{simplify = TRUE} (default), then function will print search
 \examples{
 filter_nhp(database = "PsycInfo", taxa = "papio")
 filter_nhp(database = "PsycInfo", taxa = "hominidae")
-filter_nhp(database = "PubMed", taxa = "cercopithecidae", exclude = c("papio", "macaca"))
-filter_nhp(database = "PubMed", taxa = "platyrrhini", exclude = "aotus")
+filter_nhp(database = "PubMed", taxa = "cercopithecidae", omit = c("papio", "macaca"))
+filter_nhp(database = "PubMed", taxa = "platyrrhini", omit = "aotus")
 }

@@ -107,7 +107,7 @@ test_that("incorrect inputs give appropriate error message", {
                "These terms are not valid taxa")
   expect_error(filter_nhp("PsycInfo", taxa = c("macaca", "papio", "tiger")),
                "These terms are not valid taxa")
-  expect_error(filter_nhp("PsycInfo", taxa = "platyrrhini", exclude = "snake"),
+  expect_error(filter_nhp("PsycInfo", taxa = "platyrrhini", omit = "snake"),
                "These terms are not valid taxa")
   expect_error(filter_nhp("PsycInfo", taxa = 666),
                "These terms are not valid taxa")
@@ -120,7 +120,7 @@ test_that("incorrect inputs give appropriate error message", {
 # # therefore it does not make sense for Daubentonia to be excluded
 # test_that("warning is given when excluding the only child of a parent", {
 #   expect_warning(
-#     filter_nhp(taxa = "Daubentoniidae", exclude = "Daubentonia"),
+#     filter_nhp(taxa = "Daubentoniidae", omit = "Daubentonia"),
 #     "is the only taxa within"
 #   )
 # })

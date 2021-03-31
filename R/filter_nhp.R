@@ -1,7 +1,7 @@
 #' Format non-human primate search terms for use in databases
 #'
 #' Function will return search terms for all taxa below the specified taxonomic
-#' level. Search terms for humans are excluded even if they are part of that
+#' level. Search terms for humans are omitted even if they are part of that
 #' taxonomic group.
 #'
 #' @param database A string indicating which database search terms should be
@@ -11,8 +11,8 @@
 #'   "nonhuman_primates"} (default), function will return search terms for all
 #'   non-human primates. Use \code{\link{get_nhp_taxa}} to print a list of valid
 #'   taxa.
-#' @param exclude An optional character vector of primate taxonomic groups that
-#'   occur within taxa to exclude from the search terms. This is useful for
+#' @param omit An optional character vector of primate taxonomic groups that
+#'   occur within taxa to omit from the search terms. This is useful for
 #'   example when you need search terms for all species of one family except one
 #'   genus.
 #' @param simplify Logical. Should printed output be simplified?
@@ -34,12 +34,12 @@
 #' @examples
 #' filter_nhp(database = "PsycInfo", taxa = "papio")
 #' filter_nhp(database = "PsycInfo", taxa = "hominidae")
-#' filter_nhp(database = "PubMed", taxa = "cercopithecidae", exclude = c("papio", "macaca"))
-#' filter_nhp(database = "PubMed", taxa = "platyrrhini", exclude = "aotus")
+#' filter_nhp(database = "PubMed", taxa = "cercopithecidae", omit = c("papio", "macaca"))
+#' filter_nhp(database = "PubMed", taxa = "platyrrhini", omit = "aotus")
 filter_nhp <-
   function(database = "PubMed",
            taxa = "nonhuman_primates",
-           exclude = NULL,
+           omit = NULL,
            simplify = TRUE) {
 
     # remove _ - and " "
@@ -48,7 +48,7 @@ filter_nhp <-
 
     # convert tolower so that input is case insensitive
     if(!is.null(taxa))    taxa <- tolower(taxa)
-    if(!is.null(exclude)) exclude <- tolower(exclude)
+    if(!is.null(omit)) omit <- tolower(omit)
 
     # check input to function arguments are valid
     if(!db %in% c("pubmed", "psycinfo", "webofscience")){
@@ -58,9 +58,9 @@ filter_nhp <-
 
     # check that taxa inputs are valid
     if(!all(taxa %in% correct_taxa_inputs) |
-       !all(exclude %in% correct_taxa_inputs)){
+       !all(omit %in% correct_taxa_inputs)){
       xx <- c(setdiff(taxa, correct_taxa_inputs),
-              setdiff(exclude, correct_taxa_inputs))
+              setdiff(omit, correct_taxa_inputs))
       stop(paste0("These terms are not valid taxa: ",
                   paste(xx, collapse = ", "),
                   ". Use get_nhp_taxa() for get a list of valid options."))
@@ -76,13 +76,13 @@ filter_nhp <-
     }
 
     if(db == "pubmed"){
-      term <- format_pubmed_terms(taxa, exclude)
+      term <- format_pubmed_terms(taxa, omit)
 
     } else if(db == "psycinfo"){
-      term <- format_psycinfo_terms(taxa, exclude)
+      term <- format_psycinfo_terms(taxa, omit)
 
     } else if(db == "webofscience"){
-      term <- format_wos_terms(taxa, exclude)
+      term <- format_wos_terms(taxa, omit)
     }
 
     if (simplify == TRUE)  return(cat(term))
@@ -99,7 +99,7 @@ format_general_terms <- function(d, taxa) {
   # (indicating that search term should be used)
   d3 <- d2[rowSums(sapply(d2[ , 2:ncol(d2), drop = FALSE],
                           function(x) x == 1),
-                   na.rm = T) > 0, ]
+                   na.rm = TRUE) > 0, ]
 
   # add quotes to terms
   dQuote(d3$term)
@@ -110,14 +110,14 @@ check_single_higher_taxon <- function(taxon) {
   # checks if there is only one taxonomic group below specified level
   x <- FindNode(primate_tree, taxon)
 
-  # if there is more than one group, then this group should not be excluded so return original taxon
+  # if there is more than one group, then this group should not be omitted so return original taxon
   if(x$height != x$Get("totalCount")[[1]]){
     return(taxon)
   }
 
   # if there is only one group, move down tree
   while(x$height == x$Get("totalCount")[[1]]){
-    # these are the taxonomic levels that we want to exclude
+    # these are the taxonomic levels that we want to omit
     child <- x$Get("name")
     # move down to parent
     x <- Navigate(x, "..")
@@ -127,7 +127,7 @@ check_single_higher_taxon <- function(taxon) {
 }
 
 check_higher_taxon_bracket <- function(taxa) {
-  # loops over check_single_higher_taxon() in case user wants to exclude multiple taxa
+  # loops over check_single_higher_taxon() in case user wants to omit multiple taxa
   out <- vector("list", length = length(taxa))
 
   for (i in seq_along(taxa)){
@@ -170,15 +170,15 @@ format_pubmed_mesh <- function(taxa) {
   paste0(pm3$term, pm3$mesh)
 }
 
-format_pubmed_terms <- function(taxa, exclude = NULL) {
+format_pubmed_terms <- function(taxa, omit = NULL) {
 
   mesh_terms <- format_pubmed_mesh(taxa)
   tiab_terms <- paste0(format_general_terms(ta, taxa),
                        "[tiab]")
 
-  if(!is.null(exclude)){
+  if(!is.null(omit)){
 
-    excl <- check_higher_taxon_bracket(exclude)
+    excl <- check_higher_taxon_bracket(omit)
 
     excl_mesh_terms <- format_pubmed_mesh(excl)
     excl_tiab_terms <- paste0(format_general_terms(ta, excl),
@@ -197,15 +197,15 @@ format_pubmed_terms <- function(taxa, exclude = NULL) {
 
 # format psycinfo ---------------------------------------------------------
 
-format_psycinfo_terms <- function(taxa, exclude = NULL) {
+format_psycinfo_terms <- function(taxa, omit = NULL) {
 
   index_terms <- format_general_terms(pii, taxa)
   tiab_terms <- format_general_terms(ta, taxa)
 
-  # exclude specified terms
-  if(!is.null(exclude)){
+  # omit specified terms
+  if(!is.null(omit)){
 
-    excl <- check_higher_taxon_bracket(exclude)
+    excl <- check_higher_taxon_bracket(omit)
 
     excl_index_terms <- format_general_terms(pii, excl)
     excl_tiab_terms <- format_general_terms(ta, excl)
@@ -233,14 +233,14 @@ format_psycinfo_terms <- function(taxa, exclude = NULL) {
 
 # format web of science ---------------------------------------------------
 
-format_wos_terms <- function(taxa, exclude = NULL) {
+format_wos_terms <- function(taxa, omit = NULL) {
 
   general_terms <- format_general_terms(ta, taxa)
 
-  # exclude specified terms
-  if(!is.null(exclude)){
+  # omit specified terms
+  if(!is.null(omit)){
 
-    excl <- check_higher_taxon_bracket(exclude)
+    excl <- check_higher_taxon_bracket(omit)
     excl_general_terms <- format_general_terms(ta, excl)
     general_terms <- setdiff(general_terms, excl_general_terms)
   }

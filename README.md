@@ -76,12 +76,12 @@ filter_nhp(database = "PubMed",
 #> "hylobatidae"[mh] OR "pongo"[mh] OR "gibbon"[tiab] OR "gibbons"[tiab] OR "hoolock"[tiab] OR "hylobates"[tiab] OR "hylobatidae"[tiab] OR "lesser ape*"[tiab] OR "nomascus"[tiab] OR "orang utan*"[tiab] OR "orang-utan*"[tiab] OR "orangutan*"[tiab] OR "pongid*"[tiab] OR "ponginae"[tiab] OR "pongo"[tiab] OR "siamang"[tiab] OR "siamangs"[tiab] OR "symphalangus"[tiab]
 ```
 
-You can also exclude a taxonomic group(s) that occurs within a taxa.
+You can also omit a taxonomic group(s) that occurs within a taxa.
 
 ``` r
 filter_nhp(database = "WebOfScience", 
            taxa = "Hominidae", 
-           exclude = "Pongo")
+           omit = "Pongo")
 #> TI=("bonobo" OR "bonobos" OR "chimp" OR "chimpanzee" OR "chimpanzees" OR "chimps" OR "gorilla" OR "gorillas" OR "great ape*" OR "hominid*" OR "hominin" OR "homininae" OR "hominine" OR "hominines" OR "hominini" OR "hominins" OR "pan paniscus" OR "pan troglodytes" OR "panin" OR "panina" OR "panins") OR AB=("bonobo" OR "bonobos" OR "chimp" OR "chimpanzee" OR "chimpanzees" OR "chimps" OR "gorilla" OR "gorillas" OR "great ape*" OR "hominid*" OR "hominin" OR "homininae" OR "hominine" OR "hominines" OR "hominini" OR "hominins" OR "pan paniscus" OR "pan troglodytes" OR "panin" OR "panina" OR "panins") OR AK=("bonobo" OR "bonobos" OR "chimp" OR "chimpanzee" OR "chimpanzees" OR "chimps" OR "gorilla" OR "gorillas" OR "great ape*" OR "hominid*" OR "hominin" OR "homininae" OR "hominine" OR "hominines" OR "hominini" OR "hominins" OR "pan paniscus" OR "pan troglodytes" OR "panin" OR "panina" OR "panins")
 ```
 

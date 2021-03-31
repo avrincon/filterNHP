@@ -72,12 +72,12 @@ filter_nhp(database = "PubMed",
            taxa = c("Hylobatidae", "Ponginae"))
 ```
 
-You can also exclude a taxonomic group(s) that occurs within a taxa.
+You can also omit a taxonomic group(s) that occurs within a taxa.
 
 ```{r}
 filter_nhp(database = "WebOfScience", 
            taxa = "Hominidae", 
-           exclude = "Pongo")
+           omit = "Pongo")
 ```
 
 To print a list of all taxa options you can use `get_nhp_taxa()`.

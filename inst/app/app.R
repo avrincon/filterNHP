@@ -70,7 +70,7 @@ ui <-
                   tags$li('Determine the broadest taxonomic level(s) of NHP desired (see primate order table) and select option(s) from "Taxa to include" in the panel to the right.',
                           tags$ul(
                             tags$li('If a search filter for all non-human primates is desired, simply tick the checkbox.'),
-                            tags$li('Exclusion of a sub-group can be specified by selecting from "Taxa to exclude".')
+                            tags$li('Omission of a sub-group can be specified by selecting from "Taxa to omit".')
                           )
                   ),
                   tags$li('Hit "Create!"'),
@@ -115,7 +115,7 @@ ui <-
             ),
 
             selectizeInput(inputId = "exclude_text",
-                           label = "Taxa to exclude",
+                           label = "Taxa to omit",
                            choices = taxa_options,
                            selected = NULL,
                            multiple = TRUE,
@@ -247,7 +247,7 @@ server <- function(input, output, session) {
   # takes the input from the text boxes
   # if include text box is empty, it will take input from all nhp checkbox
   v <- reactiveValues(taxa = NULL,
-                      exclude = NULL,
+                      omit = NULL,
                       database = "PubMed")
 
   # update clipboard when changing taxa
@@ -260,11 +260,11 @@ server <- function(input, output, session) {
       v$taxa <- input$all_nhp_input
     }
     if (length(input$exclude_text) > 0){
-      v$exclude <- input$exclude_text
+      v$omit <- input$exclude_text
     }
     if (length(input$exclude_text) == 0 & length(input$include_text) > 0){
       v$taxa <- input$include_text
-      v$exclude <- input$exclude_text
+      v$omit <- input$exclude_text
     }
 
     v$database <- input$database_input
@@ -273,7 +273,7 @@ server <- function(input, output, session) {
     res <-
       filter_nhp(database = input$database_input,
                  taxa = v$taxa,
-                 exclude = v$exclude,
+                 omit = v$omit,
                  simplify = FALSE)
 
     # copy search filter to clipboard
@@ -294,11 +294,11 @@ server <- function(input, output, session) {
       v$taxa <- input$all_nhp_input
     }
     if (length(input$exclude_text) > 0){
-      v$exclude <- input$exclude_text
+      v$omit <- input$exclude_text
     }
     if (length(input$exclude_text) == 0 & length(input$include_text) > 0){
       v$taxa <- input$include_text
-      v$exclude <- input$exclude_text
+      v$omit <- input$exclude_text
     }
 
     v$database <- input$database_input
@@ -307,7 +307,7 @@ server <- function(input, output, session) {
     res <-
       filter_nhp(database = input$database_input,
                  taxa = v$taxa,
-                 exclude = v$exclude,
+                 omit = v$omit,
                  simplify = FALSE)
 
     # copy search filter to clipboard
@@ -324,7 +324,7 @@ server <- function(input, output, session) {
       filter_nhp(
         database = input$database_input,
         taxa = v$taxa,
-        exclude = v$exclude
+        omit = v$omit
       )
     )
 
@@ -337,7 +337,7 @@ server <- function(input, output, session) {
                     inputId = "exclude_text",
                     value = "")
     v$taxa <- NULL
-    v$exclude <- NULL
+    v$omit <- NULL
 
     # clear clipboard
     output$clip <- renderUI({
