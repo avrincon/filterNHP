@@ -114,7 +114,7 @@ ui <-
               title = "Create search filter for all non-human primates"
             ),
 
-            selectizeInput(inputId = "exclude_text",
+            selectizeInput(inputId = "omit_text",
                            label = "Taxa to omit",
                            choices = taxa_options,
                            selected = NULL,
@@ -198,6 +198,28 @@ ui <-
           div(class = "faq", id = "faq3_answer",
               includeHTML("www/FAQ-3.html")
           )
+        ),
+
+        h3("How can I combine an NHP filter with a topic search?",
+           class = "faq_head",
+           actionButton(inputId = "faq4_button",
+                        label = "",
+                        icon = icon("chevron-down"))),
+        hidden(
+          div(class = "faq", id = "faq4_answer",
+              includeHTML("www/FAQ-4.html")
+          )
+        ),
+
+        h3("More resources for searching PubMed, PsycINFO (via EBSCOHost), and Web of Science",
+           class = "faq_head",
+           actionButton(inputId = "faq5_button",
+                        label = "",
+                        icon = icon("chevron-down"))),
+        hidden(
+          div(class = "faq", id = "faq5_answer",
+              includeHTML("www/FAQ-5.html")
+          )
         )
       ),
 
@@ -256,15 +278,15 @@ server <- function(input, output, session) {
     if (length(input$include_text) > 0){
       v$taxa <- input$include_text
     }
-    if (length(c(input$include_text, input$exclude_text)) == 0){
+    if (length(c(input$include_text, input$omit_text)) == 0){
       v$taxa <- input$all_nhp_input
     }
-    if (length(input$exclude_text) > 0){
-      v$omit <- input$exclude_text
+    if (length(input$omit_text) > 0){
+      v$omit <- input$omit_text
     }
-    if (length(input$exclude_text) == 0 & length(input$include_text) > 0){
+    if (length(input$omit_text) == 0 & length(input$include_text) > 0){
       v$taxa <- input$include_text
-      v$omit <- input$exclude_text
+      v$omit <- input$omit_text
     }
 
     v$database <- input$database_input
@@ -290,15 +312,15 @@ server <- function(input, output, session) {
     if (length(input$include_text) > 0){
       v$taxa <- input$include_text
     }
-    if (length(c(input$include_text, input$exclude_text)) == 0){
+    if (length(c(input$include_text, input$omit_text)) == 0){
       v$taxa <- input$all_nhp_input
     }
-    if (length(input$exclude_text) > 0){
-      v$omit <- input$exclude_text
+    if (length(input$omit_text) > 0){
+      v$omit <- input$omit_text
     }
-    if (length(input$exclude_text) == 0 & length(input$include_text) > 0){
+    if (length(input$omit_text) == 0 & length(input$include_text) > 0){
       v$taxa <- input$include_text
-      v$omit <- input$exclude_text
+      v$omit <- input$omit_text
     }
 
     v$database <- input$database_input
@@ -334,7 +356,7 @@ server <- function(input, output, session) {
                     inputId = "include_text",
                     value = "")
     updateTextInput(session,
-                    inputId = "exclude_text",
+                    inputId = "omit_text",
                     value = "")
     v$taxa <- NULL
     v$omit <- NULL
@@ -394,6 +416,30 @@ server <- function(input, output, session) {
     }else{
       updateActionButton(session,
                          inputId = "faq3_button",
+                         icon = icon("chevron-down"))
+    }
+  })
+  observeEvent(input$faq4_button, {
+    toggle('faq4_answer')
+    if(input$faq4_button %% 2 == 1){
+      updateActionButton(session,
+                         inputId = "faq4_button",
+                         icon = icon("chevron-up"))
+    }else{
+      updateActionButton(session,
+                         inputId = "faq4_button",
+                         icon = icon("chevron-down"))
+    }
+  })
+  observeEvent(input$faq5_button, {
+    toggle('faq5_answer')
+    if(input$faq5_button %% 2 == 1){
+      updateActionButton(session,
+                         inputId = "faq5_button",
+                         icon = icon("chevron-up"))
+    }else{
+      updateActionButton(session,
+                         inputId = "faq5_button",
                          icon = icon("chevron-down"))
     }
   })

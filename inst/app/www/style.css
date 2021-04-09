@@ -20,13 +20,27 @@
 #clip_button {
   background-color: whitesmoke;
 }
-#table_button, #faq1_button, #faq2_button, #faq3_button {
+#table_button, #faq1_button, #faq2_button, #faq3_button, #faq4_button, #faq5_button {
   background-color: white;
   border: none;
+}
+.faq_head {
+  max-width: 1275px;
 }
 .faq{
   max-width: 800px;
   text-align: justify;
+}
+.index_term{
+  font-style: italic;
+}
+.search_filter_faq{
+  color: #1B9E77
+  /* color: #66A61E */
+}
+.topic_faq{
+  color: #7570B3
+  /* color: #D95F02 */
 }
 
 /*table layouts*/
@@ -37,6 +51,7 @@ table {
 td {
   /* so Cercopithecoidea and Cercopithecidae are not too close */
   min-width:125px;
+  text-align: left;
 }
 #primate_order_table {
   margin: 20px;
