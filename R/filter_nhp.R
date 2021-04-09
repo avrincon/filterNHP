@@ -191,7 +191,6 @@ format_pubmed_terms <- function(taxa, omit = NULL) {
   paste0(c(sort(mesh_terms),
            sort(tiab_terms)),
          collapse = " OR ")
-
 }
 
 
@@ -247,12 +246,8 @@ format_wos_terms <- function(taxa, omit = NULL) {
 
   general_terms <- paste0(sort(general_terms), collapse = " OR ")
 
-  wos_title_terms <- paste0("TI=(", general_terms, ")")
-  wos_abtract_terms <- paste0("AB=(", general_terms, ")")
-  wos_author_keywords_terms <- paste0("AK=(", general_terms, ")")
+  wos_terms <- paste0("TS=(", general_terms, ")")
 
-  paste0(c(wos_title_terms,
-           wos_abtract_terms,
-           wos_author_keywords_terms),
+  paste0(wos_terms,
          collapse = " OR ")
 }
