@@ -144,7 +144,7 @@ format_pubmed_mesh <- function(taxa) {
 
   # keep rows where at least one taxa column is not NA, and is lower level taxa
   pm3 <- pm2[rowSums(sapply(pm2[ , 2:ncol(pm2), drop = FALSE],
-                            function(x) x %in% c("ne", "nn")),
+                            function(x) x %in% c("explosion", "noexplosion")),
                      na.rm = TRUE) > 0, ]
 
   # if nrow is 0, there are no mesh terms, return empty object
@@ -153,7 +153,7 @@ format_pubmed_mesh <- function(taxa) {
   }
 
   # otherwise check if terms should be exploded or not
-  xx <- sapply(pm3[ , 2:ncol(pm3), drop = F], function(x) x == "ne")
+  xx <- sapply(pm3[ , 2:ncol(pm3), drop = F], function(x) x == "explosion")
 
   # cannot do rowSums when matrix/vector has length 1, so use regular sum()
   if(is.vector(xx)){
