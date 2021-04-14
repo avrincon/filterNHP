@@ -44,7 +44,7 @@ ui <-
           wellPanel(
             id = "instruction_well",
             fluidRow(
-              p("Identifying all of the relevant research on a particular topic for literature reviews involving non-human primates (NHPs) can be difficult and time consuming. filterNHP automatizes the creation of search filters for the taxonomic levels of NHPs for three bibliographic databases (",
+              p("Identifying all of the relevant research on a particular topic for literature reviews involving non-human primates (NHPs) can be difficult and time consuming. filterNHP automatizes the creation of search filters for the taxonomic levels of NHPs for three bibliographic sources (",
                 a("PubMed",
                   href = "https://pubmed.ncbi.nlm.nih.gov/",
                   .noWS = "outside"),
@@ -57,7 +57,7 @@ ui <-
                   href = "http://login.webofknowledge.com/error/Error?Error=IPError&PathInfo=%2F&RouterURL=http%3A%2F%2Fwww.webofknowledge.com%2F&Domain=.webofknowledge.com&Src=IP&Alias=WOK5",
                   .noWS = "outside"),
                 ").",
-                "These search filters can be combined with topic search strings using the Boolean operator 'AND' to facilitate the retrieval of all publications related to NHPs and the topic within the specified database."
+                "These search filters can be combined with topic search strings using the Boolean operator 'AND' to facilitate the retrieval of all publications related to NHPs and the topic within the specified database/platform."
                 # style="min-width:1000px; word-wrap:break-word;"
               )
             ),
@@ -66,7 +66,7 @@ ui <-
                 em("Usage:"),
                 br(),
                 tags$ul(
-                  tags$li("Select the database of interest."),
+                  tags$li("Select the bibliographic source of interest."),
                   tags$li('Determine the broadest taxonomic level(s) of NHP desired (see primate order table) and select option(s) from "Taxa to include" in the panel to the right.',
                           tags$ul(
                             tags$li('If a search filter for all non-human primates is desired, simply tick the checkbox.'),
@@ -91,7 +91,7 @@ ui <-
             id = "input_well",
             selectInput(
               inputId = "database_input",
-              label = "Database",
+              label = "Bibliographic source",
               choices = c("PubMed", "PsycINFO", "Web of Science"),
               selected = "PubMed"
             ),
