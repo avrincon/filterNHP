@@ -167,7 +167,7 @@ ui <-
       tabPanel(
         title = "FAQ",
         # h1("Frequently Asked Questions"),
-        h3("Why is the search filter syntax different for each database?",
+        h4("Why is the search filter syntax different for each database?",
            class = "faq_head",
            actionButton(inputId = "faq1_button",
                         label = "",
@@ -178,7 +178,7 @@ ui <-
           )
         ),
 
-        h3("What are index terms?",
+        h4("What are index terms?",
            class = "faq_head",
            actionButton(inputId = "faq2_button",
                         label = "",
@@ -189,7 +189,7 @@ ui <-
           )
         ),
 
-        h3("Why do I detect publications that are not related to NHPs?",
+        h4("Why do I detect publications that are not related to NHPs?",
            class = "faq_head",
            actionButton(inputId = "faq3_button",
                         label = "",
@@ -200,7 +200,7 @@ ui <-
           )
         ),
 
-        h3("How can I combine an NHP filter with a topic search?",
+        h4("How can I combine an NHP filter with a topic search?",
            class = "faq_head",
            actionButton(inputId = "faq4_button",
                         label = "",
@@ -211,7 +211,7 @@ ui <-
           )
         ),
 
-        h3("More resources for searching PubMed, PsycINFO (via EBSCOHost), and Web of Science",
+        h4("More resources for searching PubMed, PsycINFO (via EBSCOhost), and Web of Science",
            class = "faq_head",
            actionButton(inputId = "faq5_button",
                         label = "",
