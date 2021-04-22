@@ -1,59 +1,58 @@
 #' Format non-human primate search terms for use in databases
 #'
 #' Function will return search terms for all taxa below the specified taxonomic
-#' level. Search terms for humans are omitted even if they are part of that
-#' taxonomic group.
+#' level. Search terms for humans are always omitted, even if they are part of
+#' that taxonomic group.
 #'
-#' @param database A string indicating which database search terms should be
-#'   formatted for. Current options are "PubMed" (default), "PsycInfo" or
-#'   "WebOfScience".
+#' @param source A string indicating which bibliographic source search terms
+#'   should be formatted for. Current options are "PubMed" (default), "PsycInfo"
+#'   or "WebOfScience".
 #' @param taxa A character vector of primate taxa. If \code{taxa =
 #'   "nonhuman_primates"} (default), function will return search terms for all
 #'   non-human primates. Use \code{\link{get_nhp_taxa}} to print a list of valid
 #'   taxa.
 #' @param omit An optional character vector of primate taxonomic groups that
-#'   occur within taxa to omit from the search terms. This is useful for
-#'   example when you need search terms for all species of one family except one
-#'   genus.
+#'   occur within taxa to omit from the search terms. This is useful for example
+#'   when you need search terms for all species of one family except one genus.
 #' @param simplify Logical. Should printed output be simplified?
 #'
 #' @details If \code{simplify = TRUE} (default), then function will print search
 #'   terms to the console that can be directly copy-pasted into the relevant
-#'   database as is. However, the object returned is \code{NULL}. If
+#'   bibliographic source as is. However, the object returned is \code{NULL}. If
 #'   \code{simplify = FALSE}, then function returns a character vector of length
 #'   == 1. This may be useful if the user wants to assign the output to an r
 #'   object for further manipulation.
 #'
 #' @return \code{NULL} or a string of search terms that are associated with the
-#'   specified taxa, formatted for use in the specified database.
+#'   specified taxa, formatted for use in the specified bibliographic source
 #'
 #' @export
 #'
 #' @import data.tree
 #'
 #' @examples
-#' filter_nhp(database = "PsycInfo", taxa = "papio")
-#' filter_nhp(database = "PsycInfo", taxa = "hominidae")
-#' filter_nhp(database = "PubMed", taxa = "cercopithecidae", omit = c("papio", "macaca"))
-#' filter_nhp(database = "PubMed", taxa = "platyrrhini", omit = "aotus")
+#' filter_nhp(source = "PsycInfo", taxa = "papio")
+#' filter_nhp(source = "PsycInfo", taxa = "hominidae")
+#' filter_nhp(source = "PubMed", taxa = "cercopithecidae", omit = c("papio", "macaca"))
+#' filter_nhp(source = "PubMed", taxa = "platyrrhini", omit = "aotus")
 filter_nhp <-
-  function(database = "PubMed",
+  function(source = "PubMed",
            taxa = "nonhuman_primates",
            omit = NULL,
            simplify = TRUE) {
 
     # remove _ - and " "
-    db <- tolower(database)
+    db <- tolower(source)
     db <- gsub("|_|-| ", "", db)
 
     # convert tolower so that input is case insensitive
-    if(!is.null(taxa))    taxa <- tolower(taxa)
+    if(!is.null(taxa)) taxa <- tolower(taxa)
     if(!is.null(omit)) omit <- tolower(omit)
 
     # check input to function arguments are valid
     if(!db %in% c("pubmed", "psycinfo", "webofscience")){
-      stop(paste(database,
-                 "is not a valid database. Please choose one from: PubMed, PsycInfo or WebOfScience."))
+      stop(paste(source,
+                 "is not a valid source. Please choose one from: PubMed, PsycInfo or WebOfScience."))
     }
 
     # check that taxa inputs are valid

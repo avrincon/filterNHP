@@ -74,7 +74,7 @@ ui <-
                           )
                   ),
                   tags$li('Hit "Create!"'),
-                  tags$li('Copy and paste the generated search filter into the corresponding database.')
+                  tags$li('Copy and paste the generated search filter into the corresponding bibliographic source.')
                 )
               )
             ),
@@ -141,7 +141,7 @@ ui <-
               uiOutput(outputId = "clip", inline = TRUE)
             )
           ),
-          h4("Copy search filter and paste in relevant database"),
+          h4("Copy search filter and paste in relevant bibliographic source"),
           div(
             # id = "search_filter",
             textOutput(outputId = "search_filter")
@@ -167,7 +167,7 @@ ui <-
       tabPanel(
         title = "FAQ",
         # h1("Frequently Asked Questions"),
-        h4("Why is the search filter syntax different for each database?",
+        h4("Why is the search filter syntax different for each bibliographic source?",
            class = "faq_head",
            actionButton(inputId = "faq1_button",
                         label = "",
@@ -270,7 +270,7 @@ server <- function(input, output, session) {
   # if include text box is empty, it will take input from all nhp checkbox
   v <- reactiveValues(taxa = NULL,
                       omit = NULL,
-                      database = "PubMed")
+                      source = "PubMed")
 
   # update clipboard when changing taxa
   observeEvent(input$create, {
@@ -289,11 +289,11 @@ server <- function(input, output, session) {
       v$omit <- input$omit_text
     }
 
-    v$database <- input$database_input
+    v$source <- input$database_input
 
     # create search filter to copy
     res <-
-      filter_nhp(database = input$database_input,
+      filter_nhp(source = input$database_input,
                  taxa = v$taxa,
                  omit = v$omit,
                  simplify = FALSE)
@@ -306,7 +306,7 @@ server <- function(input, output, session) {
     })
   })
 
-  # update clipboard when changing database
+  # update clipboard when changing source
   observeEvent(input$database_input, {
 
     if (length(input$include_text) > 0){
@@ -323,11 +323,11 @@ server <- function(input, output, session) {
       v$omit <- input$omit_text
     }
 
-    v$database <- input$database_input
+    v$source <- input$database_input
 
     # create search filter to copy
     res <-
-      filter_nhp(database = input$database_input,
+      filter_nhp(source = input$database_input,
                  taxa = v$taxa,
                  omit = v$omit,
                  simplify = FALSE)
@@ -344,7 +344,7 @@ server <- function(input, output, session) {
   output$search_filter <-
     renderPrint(
       filter_nhp(
-        database = input$database_input,
+        source = input$database_input,
         taxa = v$taxa,
         omit = v$omit
       )

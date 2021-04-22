@@ -5,16 +5,16 @@
 \title{Format non-human primate search terms for use in databases}
 \usage{
 filter_nhp(
-  database = "PubMed",
+  source = "PubMed",
   taxa = "nonhuman_primates",
   omit = NULL,
   simplify = TRUE
 )
 }
 \arguments{
-\item{database}{A string indicating which database search terms should be
+\item{source}{A string indicating which bibliographic source search terms should be
 formatted for. Current options are "PubMed" (default), "PsycInfo" or
-"WebOfScience".}
+"Web of Science".}
 
 \item{taxa}{A character vector of primate taxa. If \code{taxa =
 "nonhuman_primates"} (default), function will return search terms for all
@@ -30,24 +30,24 @@ genus.}
 }
 \value{
 \code{NULL} or a string of search terms that are associated with the
-  specified taxa, formatted for use in the specified database.
+  specified taxa, formatted for use in the specified bibliographic source
 }
 \description{
 Function will return search terms for all taxa below the specified taxonomic
-level. Search terms for humans are omitted even if they are part of that
+level. Search terms for humans are always omitted, even if they are part of that
 taxonomic group.
 }
 \details{
 If \code{simplify = TRUE} (default), then function will print search
   terms to the console that can be directly copy-pasted into the relevant
-  database as is. However, the object returned is \code{NULL}. If
+  bibliographic source as is. However, the object returned is \code{NULL}. If
   \code{simplify = FALSE}, then function returns a character vector of length
   == 1. This may be useful if the user wants to assign the output to an r
   object for further manipulation.
 }
 \examples{
-filter_nhp(database = "PsycInfo", taxa = "papio")
-filter_nhp(database = "PsycInfo", taxa = "hominidae")
-filter_nhp(database = "PubMed", taxa = "cercopithecidae", omit = c("papio", "macaca"))
-filter_nhp(database = "PubMed", taxa = "platyrrhini", omit = "aotus")
+filter_nhp(source = "PsycInfo", taxa = "papio")
+filter_nhp(source = "PsycInfo", taxa = "hominidae")
+filter_nhp(source = "PubMed", taxa = "cercopithecidae", omit = c("papio", "macaca"))
+filter_nhp(source = "PubMed", taxa = "platyrrhini", omit = "aotus")
 }

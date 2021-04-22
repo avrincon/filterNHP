@@ -23,7 +23,6 @@ get_nhp_taxa <- function(level = "all") {
       collapse = " "))
   }
 
-
   if (level[[1]] == "all"){
     primate_taxa
   } else{
