@@ -15,13 +15,16 @@ knitr::opts_chunk$set(
 
 # filterNHP <a><img src='inst/app/www/packageHex_v2_20210121.png' align="right" height="139"/></a>
 
-Non-human primate search filters.
+Non-human primate (NHP) search filters.
 
-The goal of `filterNHP` is to is to provide users with an easy way to obtain a comprehensive search filters to use in popular databases such as 
+`filterNHP` is an R package and web-based application for generating search filters to query scientific bibliographic sources 
+(
 [PubMed](https://pubmed.ncbi.nlm.nih.gov/), 
-[PsycInfo](http://search.ebscohost.com/Login.aspx?profile=web&defaultdb=psyh&lp=login.asp&ref=https%3A%2F%2Fwww%2Egoogle%2Ecom%2F&authtype=ip,uid) 
+[PsycInfo (via EBSCOhost)](http://search.ebscohost.com/Login.aspx?profile=web&defaultdb=psyh&lp=login.asp&ref=https%3A%2F%2Fwww%2Egoogle%2Ecom%2F&authtype=ip,uid) 
 and 
-[Web of Science](http://login.webofknowledge.com/error/Error?Error=IPError&PathInfo=%2F&RouterURL=http%3A%2F%2Fwww.webofknowledge.com%2F&Domain=.webofknowledge.com&Src=IP&Alias=WOK5).
+[Web of Science](http://login.webofknowledge.com/error/Error?Error=IPError&PathInfo=%2F&RouterURL=http%3A%2F%2Fwww.webofknowledge.com%2F&Domain=.webofknowledge.com&Src=IP&Alias=WOK5)
+)
+for non-human primate related publications. It is aimed at researchers wishing to conduct unbiased and comprehensive literature reviews.
 
 ## Installation
 
@@ -44,48 +47,42 @@ If you have the `filterNHP` package installed, you can launch the Shiny App from
 library(filterNHP)
 ```
 
-The core function of this package is `filter_nhp()`. To create a search filter the user must specify a database and taxa of interest. By default the function prints a search filter for all non-human primates, formatted for PubMed. This is our recommended search filter for conducting a comprehensive literature review on all NHPs. 
+The core function of this package is `filter_nhp()`. To create a search filter the user must specify a bibliographic source and taxa of interest. By default the function prints a search filter for all non-human primates, formatted for PubMed.
 
 ```{r}
-filter_nhp()
-```
-
-Or you can explicitly specify the database and all NHPs (gives same result as above).
-
-```{r}
-filter_nhp(database = "PubMed", 
+filter_nhp(source = "PubMed", 
            taxa = "nonhuman_primates")
 ```
 
-It is also possible to create search filters for any NHP taxon or combination of taxa, down to the genus level. For example
+It is also possible to create search filters for any NHP taxon or combination of taxa, down to the genus level. For example:
 
 ```{r}
-filter_nhp(database = "PsycInfo", 
+filter_nhp(source = "PsycInfo", 
            taxa = "Catarrhini")
 ```
 ```{r}
-filter_nhp(database = "WebOfScience", 
+filter_nhp(source = "WebOfScience", 
            taxa = c("Papio", "Theropithecus", "Mandrillus"))
 ```
 ```{r}
-filter_nhp(database = "PubMed", 
+filter_nhp(source = "PubMed", 
            taxa = c("Hylobatidae", "Ponginae"))
 ```
 
 You can also omit a taxonomic group(s) that occurs within a taxa.
 
 ```{r}
-filter_nhp(database = "WebOfScience", 
+filter_nhp(source = "WebOfScience", 
            taxa = "Hominidae", 
            omit = "Pongo")
 ```
 
 To print a list of all taxa options you can use `get_nhp_taxa()`.
 
-By default, with the argument `simplify = TRUE`, search filters are printed to the console in the appropriate format of the specified database, such that they can be used (copy-pasted) without modification. However, the object returned is `NULL`. If `simplify = FALSE`, then the function returns a character string. This may be useful if the user wants to assign the output to an R object for further manipulation.
+By default, with the argument `simplify = TRUE`, search filters are printed to the console in the appropriate format of the specified bibliographic source, such that they can be used (copy-pasted) without modification. However, the object returned is `NULL`. If `simplify = FALSE`, then the function returns a character string. This may be useful if the user wants to assign the output to an R object for further manipulation.
 
 ```{r}
-filter_nhp(database = "PsycInfo", taxa = "aotus", simplify = TRUE)
-filter_nhp(database = "PsycInfo", taxa = "aotus", simplify = FALSE)
+filter_nhp(source = "PsycInfo", taxa = "aotus", simplify = TRUE)
+filter_nhp(source = "PsycInfo", taxa = "aotus", simplify = FALSE)
 ```
 
