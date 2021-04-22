@@ -6,14 +6,14 @@
 Non-human primate (NHP) search filters.
 
 `filterNHP` is an R package and web-based application for generating
-search filters to query scientific bibliographic sources (
-[PubMed](https://pubmed.ncbi.nlm.nih.gov/), [PsycINFO via
+search filters to query scientific bibliographic sources
+([PubMed](https://pubmed.ncbi.nlm.nih.gov/), [PsycINFO via
 EBSCOhost](http://search.ebscohost.com/Login.aspx?profile=web&defaultdb=psyh&lp=login.asp&ref=https%3A%2F%2Fwww%2Egoogle%2Ecom%2F&authtype=ip,uid)
 and [Web of
-Science](http://login.webofknowledge.com/error/Error?Error=IPError&PathInfo=%2F&RouterURL=http%3A%2F%2Fwww.webofknowledge.com%2F&Domain=.webofknowledge.com&Src=IP&Alias=WOK5)
-) for non-human primate related publications. Search filters are
-designed for researchers wishing to conduct unbiased and comprehensive
-literature reviews.
+Science](http://login.webofknowledge.com/error/Error?Error=IPError&PathInfo=%2F&RouterURL=http%3A%2F%2Fwww.webofknowledge.com%2F&Domain=.webofknowledge.com&Src=IP&Alias=WOK5))
+for non-human primate related publications. Search filters are designed
+for researchers wishing to conduct unbiased and comprehensive literature
+reviews.
 
 ## Installation
 
