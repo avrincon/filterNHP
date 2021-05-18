@@ -81,7 +81,11 @@ ui <-
               )
             ),
             fluidRow(
-              p("We encourage users to review the search filters and adapt them to their own needs. For further details, please see Cassidy et al.,", em("in review", .noWS = "after"), ". To report a bug or request a new feature, please use the ",
+              p("We encourage users to review the search filters and adapt them to their own needs. For further details, please see ",
+                a("Cassidy et al., (2021)",
+                  href = "https://doi.org/10.1002/ajp.23287",
+                  .noWS = "outside"),".",
+                "To report a bug or request a new feature, please use the ",
                 a("GitHub repository",
                   href = "https://github.com/avrincon/filterNHP/issues",
                   .noWS = "outside"),
@@ -129,11 +133,12 @@ ui <-
             br(),
             br(),
 
-            p("Please cite: Cassidy LC, Leenaars CHC, Rincon AV, Pfefferle D,",
-              '(', em("in review", .noWS = c("outside")), ').',
-              '"Comprehensive search filters for retrieving publications on non-human primates for literature reviews (filterNHP)".',
+            p("Please cite: Cassidy LC, Leenaars CHC, Rincon AV, & Pfefferle D. (2021). Comprehensive search filters for retrieving publications on non-human primates for literature reviews (filterNHP).",
               em('American Journal of Primatology', .noWS = c("after")),
-              '.')
+              ".",
+              a("https://doi.org/10.1002/ajp.23287",
+                     href = "https://doi.org/10.1002/ajp.23287",
+                     .noWS = "after"))
           )
         ),
 
