@@ -1,12 +1,12 @@
 Package: filterNHP
 Type: Package
 Title: Non-human Primate Search Filters
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: person("Alan", "Rincon", email = "avrincon1@gmail.com",
                   role = c("aut", "cre"))
-Description: This package provides a convinient way for researchers to obtain 
-    formatted search filters for non-human primates for popular databases such 
-    as PubMed and Web of Science. 
+Description: Generate search filters to query scientific bibliographic sources, 
+    such as PubMed and Web of Science, for non-human primate related 
+    publications. 
 License: AGPL (>= 3)
 Encoding: UTF-8
 LazyData: true
@@ -22,7 +22,6 @@ Imports:
     shiny,
     shinyWidgets,
     shinyjs,
-    clipr,
     shinyBS,
     rclipboard
 VignetteBuilder: knitr
