@@ -29,7 +29,7 @@ ui <-
       windowTitle = "filterNHP: Non-human primate (NHP) search filter generator"
     ),
 
-    h5("version 0.0.1"),
+    h5("version 0.1.0"),
 
     tabsetPanel(
       tabPanel(
@@ -233,7 +233,7 @@ ui <-
 
       tabPanel(
         title = "Version History",
-        h4("version 0.0.1"),
+        h4("version 0.1.0"),
         p("Initial release.")
       )
     )

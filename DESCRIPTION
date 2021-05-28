@@ -1,7 +1,7 @@
 Package: filterNHP
 Type: Package
 Title: Non-human Primate Search Filters
-Version: 0.0.1
+Version: 0.1.0
 Authors@R: person("Alan", "Rincon", email = "avrincon1@gmail.com",
                   role = c("aut", "cre"))
 Description: Generate search filters to query scientific bibliographic sources, 
