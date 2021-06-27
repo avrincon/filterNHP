@@ -135,7 +135,7 @@ ui <-
 
             p("Please cite: Cassidy LC, Leenaars CHC, Rincon AV, & Pfefferle D. (2021). Comprehensive search filters for retrieving publications on non-human primates for literature reviews (filterNHP).",
               em('American Journal of Primatology', .noWS = c("after")),
-              ".",
+              ", 83(7), e23287.",
               a("https://doi.org/10.1002/ajp.23287",
                      href = "https://doi.org/10.1002/ajp.23287",
                      .noWS = "after"))

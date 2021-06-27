@@ -12,7 +12,7 @@ get_nhp_taxa(level = "all")
 "superfamily", "family", "subfamily", "tribe" or "genus".}
 }
 \value{
-A named list with taxonomic terms for each level
+A named list with taxonomic terms for each level.
 }
 \description{
 Get taxonomic terms for non-human primates

@@ -12,9 +12,9 @@ filter_nhp(
 )
 }
 \arguments{
-\item{source}{A string indicating which bibliographic source search terms should be
-formatted for. Current options are "PubMed" (default), "PsycInfo" or
-"Web of Science".}
+\item{source}{A string indicating which bibliographic source search terms
+should be formatted for. Current options are "PubMed" (default), "PsycInfo"
+or "WebOfScience".}
 
 \item{taxa}{A character vector of primate taxa. If \code{taxa =
 "nonhuman_primates"} (default), function will return search terms for all
@@ -22,20 +22,19 @@ non-human primates. Use \code{\link{get_nhp_taxa}} to print a list of valid
 taxa.}
 
 \item{omit}{An optional character vector of primate taxonomic groups that
-occur within taxa to omit from the search terms. This is useful for
-example when you need search terms for all species of one family except one
-genus.}
+occur within taxa to omit from the search terms. This is useful for example
+when you need search terms for all species of one family except one genus.}
 
 \item{simplify}{Logical. Should printed output be simplified?}
 }
 \value{
 \code{NULL} or a string of search terms that are associated with the
-  specified taxa, formatted for use in the specified bibliographic source
+  specified taxa, formatted for use in the specified bibliographic source.
 }
 \description{
 Function will return search terms for all taxa below the specified taxonomic
-level. Search terms for humans are always omitted, even if they are part of that
-taxonomic group.
+level. Search terms for humans are always omitted, even if they are part of
+that taxonomic group.
 }
 \details{
 If \code{simplify = TRUE} (default), then function will print search

@@ -24,7 +24,7 @@
 #'   object for further manipulation.
 #'
 #' @return \code{NULL} or a string of search terms that are associated with the
-#'   specified taxa, formatted for use in the specified bibliographic source
+#'   specified taxa, formatted for use in the specified bibliographic source.
 #'
 #' @export
 #'

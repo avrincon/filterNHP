@@ -5,7 +5,7 @@
 #'   "all". Other options are "suborder", "infraorder", "parvorder",
 #'   "superfamily", "family", "subfamily", "tribe" or "genus".
 #'
-#' @return A named list with taxonomic terms for each level
+#' @return A named list with taxonomic terms for each level.
 #' @export
 #'
 #' @examples
