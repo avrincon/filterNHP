@@ -29,7 +29,7 @@ ui <-
       windowTitle = "filterNHP: Non-human primate (NHP) search filter generator"
     ),
 
-    h5("version 0.1.1"),
+    h5("version 0.1.2"),
 
     tabsetPanel(
       tabPanel(
