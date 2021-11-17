@@ -1,9 +1,19 @@
 Package: filterNHP
 Type: Package
-Title: Non-human Primate Search Filters
+Title: Non-Human Primate Search Filters
 Version: 0.1.2
-Authors@R: person("Alan", "Rincon", email = "avrincon1@gmail.com",
-                  role = c("aut", "cre"))
+Date: 2021-11-17
+Authors@R: c(
+    person("Lauren C.", "Cassidy", 
+           role = c("aut")),
+    person("Cathalijn H. C.", "Leenaars", 
+           role = c("aut")),
+    person("Alan V.", "Rincon", 
+           email = "avrincon1@gmail.com",
+           role = c("aut", "cre")),
+    person("Dana", "Pfefferle", 
+           role = c("aut"))
+           )
 Description: Generate search filters to query scientific bibliographic sources, 
     such as PubMed and Web of Science, for non-human primate related 
     publications. 
@@ -12,7 +22,7 @@ Encoding: UTF-8
 LazyData: true
 Depends: 
     R (>= 3.3.0)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Suggests: 
     testthat,
     knitr,
@@ -24,5 +34,4 @@ Imports:
     shinyjs,
     shinyBS,
     rclipboard
-VignetteBuilder: knitr
 Config/testthat/edition: 3
