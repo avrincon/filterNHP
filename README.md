@@ -17,11 +17,10 @@ reviews.
 
 ## Installation
 
-You can install `filterNHP` from [GitHub](https://github.com/) with:
+You can install `filterNHP` in R with:
 
 ``` r
-# install.packages("remotes")
-remotes::install_github("avrincon/filterNHP")
+install.packages("filterNHP")
 ```
 
 ## App

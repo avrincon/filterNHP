@@ -5,3 +5,4 @@
 notes/
 data-raw/
 .vscode
+^CRAN-RELEASE$

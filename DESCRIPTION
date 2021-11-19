@@ -1,7 +1,7 @@
 Package: filterNHP
 Type: Package
 Title: Non-Human Primate Search Filters
-Version: 0.1.2
+Version: 0.1.2.9000
 Date: 2021-11-17
 Authors@R: c(
     person("Lauren C.", "Cassidy", 
