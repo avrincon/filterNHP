@@ -1,0 +1,5 @@
+search	query	pubMed	EBSCOhost	WoS
+compare	simple	79312	35131	94474
+compare	filterNHP	249606	56107	279877
+topic	simple	1299	747	1501
+topic	filterNHP	2856	1038	3008
